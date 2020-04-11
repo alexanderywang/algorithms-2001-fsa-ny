@@ -1,6 +1,6 @@
-import React, { useCallback } from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router";
-import { firebase } from "../config/firebase.js";
+import { db, firebase } from "../config/firebase.js";
 import {
   Grid,
   Button,
@@ -10,50 +10,99 @@ import {
 } from "@material-ui/core";
 
 const SignUp = ({ history }) => {
-  const handleSignUp = useCallback(
-    async event => {
-      event.preventDefault();
-      const { email, password } = event.target.elements;
-      try {
-        await firebase
-          .auth()
-          .createUserWithEmailAndPassword(email.value, password.value);
-        history.push("/");
-      } catch (error) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSignUp = e => {
+    e.preventDefault();
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(cred => {
+        console.log("SignUp -> cred", cred);
+        return db
+          .collection("Users")
+          .doc(cred.user.uid)
+          .set({
+            email,
+            password
+          })
+          .then(() => {
+            history.push("/");
+          });
+      })
+      .catch(function(error) {
         alert(error);
-      }
-    },
-    [history]
-  );
+      });
+  };
 
   return (
-    <Grid>
-      <Typography variant="h1">Sign up</Typography>
-      <form onSubmit={handleSignUp}>
-        <DialogContent
-          display="flex"
-          margin="auto"
-          width="fit-content"
-          backgroundColor="#fff"
-        >
-          <TextField>
-            Email
-            <input name="email" type="email" placeholder="Email" />
-          </TextField>
-        </DialogContent>
-        <DialogContent
-          display="flex"
-          margin="auto"
-          width="fit-content"
-          backgroundColor="#fff"
-        >
-          <TextField>
-            Password
-            <input name="password" type="password" placeholder="Password" />
-          </TextField>
-        </DialogContent>
-        <Button type="submit">Sign Up</Button>
-      </form>
+    <Grid container direction="row" style={{ marginTop: "5em" }}>
+      <Grid
+        item
+        container
+        direction="column"
+        justify="center"
+        alignItems="center"
+      >
+        <Grid item container direction="column">
+          <Grid
+            item
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+          >
+            <Typography variant="h2">Sign Up</Typography>
+          </Grid>
+        </Grid>
+        <form>
+          <Grid
+            item
+            container
+            style={{ maxWidth: "20em" }}
+            justify="center"
+            alignItems="center"
+          >
+            <DialogContent
+              display="flex"
+              margin="auto"
+              width="fit-content"
+              backgroundColor="#fff"
+            >
+              <TextField
+                required
+                label="Email"
+                id="email"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+              />
+            </DialogContent>
+            <DialogContent
+              display="flex"
+              margin="auto"
+              width="fit-content"
+              backgroundColor="#fff"
+            >
+              <TextField
+                required
+                error={password.length > 0 && password.length < 6}
+                helperText={
+                  password.length < 6 && password.length > 0
+                    ? "Min 6 characters"
+                    : ""
+                }
+                type="password"
+                label="Password"
+                id="password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+              />
+            </DialogContent>
+            <Button onClick={handleSignUp}>Sign Up</Button>
+          </Grid>
+        </form>
+      </Grid>
     </Grid>
   );
 };

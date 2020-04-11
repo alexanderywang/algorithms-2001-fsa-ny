@@ -30,77 +30,83 @@ const Login = ({ history }) => {
     [history]
   );
 
-  const { currentUser } = useContext(AuthContext);
-  console.log("Login -> currentUser", currentUser);
+  const { user } = useContext(AuthContext);
 
-  if (currentUser) {
+  if (user) {
     return <Redirect to="/" />;
   }
 
   return (
-    <Grid>
-      <Typography variant="h3">Log in</Typography>
-      <form onSubmit={handleLogin}>
-        <DialogContent
-          display="flex"
-          margin="auto"
-          width="fit-content"
-          backgroundColor="#fff"
-        >
-          <TextField
-            label="Email"
-            name="email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            placeholder="Email"
-            // error={!isEmpty(validate(email)) && email.length > 0}
-            // helperText={
-            //   validate(email) && email.length > 0
-            //     ? "Please enter a valid email"
-            //     : ""
-            // }
-            // helperText={
-            //   !isEmpty(validate(email)) && email.length > 0
-            //     ? validate(email)
-            //     : ""
-            // }
-          />
-        </DialogContent>
-        <DialogContent
-          display="flex"
-          margin="auto"
-          width="fit-content"
-          backgroundColor="#fff"
-        >
-          <TextField
-            type="password"
-            label="Password"
-            name="password"
-            value={password}
-            placeholder="Password"
-            onChange={e => setPassword(e.target.value)}
-            style={{ marginBottom: "20px" }}
-          />
-        </DialogContent>
-        <Button
-          type="submit"
-          style={{
-            fontFamily: "Roboto",
-            fontSize: 14,
-            marginRight: "20px",
-            color: "#3F51B5"
-          }}
-          marginRight="20px"
-          fontWeight="400"
-          textTransform="none"
-          borderRadius="5"
-          height="46"
-          padding="10"
-          alignItems="center"
-        >
-          LOG IN
-        </Button>
-      </form>
+    <Grid container direction="row" style={{ marginTop: "5em" }}>
+      <Grid
+        item
+        container
+        direction="column"
+        justify="center"
+        alignItems="center"
+      >
+        <Grid item container direction="column">
+          <Grid
+            item
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+          >
+            <Typography variant="h2">Log In</Typography>
+          </Grid>
+        </Grid>
+        <form onSubmit={handleLogin}>
+          <DialogContent
+            display="flex"
+            margin="auto"
+            width="fit-content"
+            backgroundColor="#fff"
+          >
+            <TextField
+              label="Email"
+              name="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              placeholder="Email"
+            />
+          </DialogContent>
+          <DialogContent
+            display="flex"
+            margin="auto"
+            width="fit-content"
+            backgroundColor="#fff"
+          >
+            <TextField
+              type="password"
+              label="Password"
+              name="password"
+              value={password}
+              placeholder="Password"
+              onChange={e => setPassword(e.target.value)}
+              style={{ marginBottom: "20px" }}
+            />
+          </DialogContent>
+          <Button
+            type="submit"
+            style={{
+              fontFamily: "Roboto",
+              fontSize: 14,
+              marginRight: "20px",
+              color: "#3F51B5"
+            }}
+            marginRight="20px"
+            fontWeight="400"
+            textTransform="none"
+            borderRadius="5"
+            height="46"
+            padding="10"
+            alignItems="center"
+          >
+            LOG IN
+          </Button>
+        </form>
+      </Grid>
     </Grid>
   );
 };

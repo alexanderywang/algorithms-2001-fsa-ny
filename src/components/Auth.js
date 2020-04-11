@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import {firebase} from "../config/firebase.js";
+import { firebase } from "../config/firebase.js";
 
-export const AuthContext = React.createContext();
+export const AuthContext = React.createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [user, setUser] = useState(null);
   const [pending, setPending] = useState(true);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
-      setCurrentUser(user);
+      setUser(user);
       setPending(false);
     });
   }, []);
@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        currentUser
+        user
       }}
     >
       {children}

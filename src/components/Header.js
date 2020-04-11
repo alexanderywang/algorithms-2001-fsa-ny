@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/styles";
-import { Tabs, Tab, Grid, Button, Toolbar, AppBar } from "@material-ui/core/";
+import { Tab, Grid, Button, Toolbar, AppBar } from "@material-ui/core/";
 import { Link, Redirect } from "react-router-dom";
 import firebase from "firebase";
 import "firebase/auth";
-import Login from "./Login";
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -32,18 +31,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Header({ currentUser }) {
+export default function Header({ user }) {
   const classes = useStyles();
-
-  // const [open, setOpen] = useState(false);
-
-  // const handleClickOpen = () => {
-  //   setOpen(true);
-  // };
-
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
 
   const handleClick = e => {
     e.preventDefault();
@@ -56,7 +45,7 @@ export default function Header({ currentUser }) {
       });
   };
 
-  if (!currentUser) {
+  if (!user) {
     return (
       <React.Fragment>
         <AppBar position="fixed" style={{ background: "#fff" }}>
