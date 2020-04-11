@@ -1,16 +1,27 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
-import PairGenerator from "./PairGenerator";
-import { Grid } from "@material-ui/core";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Home from "./Home";
+import Login from "./Login";
+import SignUp from "./SignUp";
+import Header from "./Header";
+import { AuthProvider } from "./Auth";
+import PrivateRoute from "./PrivateRoute";
 
-function App() {
+const App = ({ currentUser }) => {
+  console.log("App -> currentUser", currentUser);
   return (
-    <BrowserRouter>
-      <Grid>
-        <PairGenerator />
-      </Grid>
-    </BrowserRouter>
+    <AuthProvider>
+      <BrowserRouter>
+        <Header currentUser={currentUser} />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          {/* <PrivateRoute exact path="/" component={Home} /> */}
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={SignUp} />
+        </Switch>
+      </BrowserRouter>
+    </AuthProvider>
   );
-}
+};
 
 export default App;
