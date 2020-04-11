@@ -48,7 +48,7 @@ export default function Header({ user }) {
   if (!user) {
     return (
       <React.Fragment>
-        <AppBar position="fixed" style={{ background: "#fff" }}>
+        <AppBar style={{ background: "#fff" }} position="fixed">
           <Toolbar>
             <Button
               component={Link}
@@ -104,13 +104,12 @@ export default function Header({ user }) {
             algos.
           </Button>
           <Grid className={classes.tabContainer}>
-            {/* <Tab
+            <Tab
               className={classes.tab}
               component={Link}
-              to="/dashboard"
-              label="Dashboard"
-            /> */}
-
+              to="/pairgenerator"
+              label="Pair Generator"
+            />
             <Tab
               className={classes.tab}
               component={Link}

@@ -7,6 +7,7 @@ import Header from "./Header";
 import { AuthProvider } from "./Auth";
 
 import { firebase } from "../config/firebase.js";
+import PairGenerator from "./PairGenerator";
 
 const App = () => {
   const [user, setUser] = useState({ loggedIn: true });
@@ -22,6 +23,7 @@ const App = () => {
         <Switch>
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/pairgenerator" component={PairGenerator} />
           <Route exact path="/" component={() => <Home user={user} />} />
         </Switch>
       </BrowserRouter>

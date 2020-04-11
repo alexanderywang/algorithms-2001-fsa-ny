@@ -49,7 +49,13 @@ function PairGenerator() {
   };
   if (!pairs) return <Grid>No pairs yet</Grid>;
   return (
-    <Grid container direction="row" justify="center" alignItems="flex-start">
+    <Grid
+      style={{ paddingTop: 64 }}
+      container
+      direction="row"
+      justify="center"
+      alignItems="flex-start"
+    >
       <Grid xs={6}>
         <Typography
           style={{
@@ -67,7 +73,12 @@ function PairGenerator() {
           👩‍🏫
         </Typography>
 
-        <Button variant="contained" color="primary" onClick={randomize} disableRipple="true">
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={randomize}
+          disableRipple="true"
+        >
           Make random pairs
         </Button>
         {pairs.map((pair, i) => (
@@ -84,11 +95,13 @@ function PairGenerator() {
       </Grid>
 
       <Grid xs={6} container direction="row">
-        <img alt="reacto" src={reacto} style={{ width: "100%" }} />
+        <Grid>
+          <img alt="reacto" src={reacto} style={{ width: "100%" }} />
 
-        <Link href="https://www.fullstackacademy.com/blog/whiteboard-coding-interviews-a-6-step-process-to-solve-any-problem">
-          Fullstack REACTO
-        </Link>
+          <Link href="https://www.fullstackacademy.com/blog/whiteboard-coding-interviews-a-6-step-process-to-solve-any-problem">
+            Fullstack REACTO
+          </Link>
+        </Grid>
       </Grid>
     </Grid>
   );
