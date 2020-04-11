@@ -49,7 +49,7 @@ function PairGenerator() {
   };
   if (!pairs) return <Grid>No pairs yet</Grid>;
   return (
-    <Grid>
+    <Grid container direction="row" justify="center" alignItems="flex-start">
       <Grid xs={6}>
         <Typography
           style={{
@@ -82,12 +82,10 @@ function PairGenerator() {
           </Grid>
         ))}
       </Grid>
-      <Paper>
-        <Grid xs={6} container direction="row">
-          <img alt="reacto" src={reacto} style={{ width: "100%" }} />
-        </Grid>
-      </Paper>
-      <Grid>
+
+      <Grid xs={6} container direction="row">
+        <img alt="reacto" src={reacto} style={{ width: "100%" }} />
+
         <Link href="https://www.fullstackacademy.com/blog/whiteboard-coding-interviews-a-6-step-process-to-solve-any-problem">
           Fullstack REACTO
         </Link>
