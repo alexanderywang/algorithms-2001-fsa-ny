@@ -67,7 +67,7 @@ function PairGenerator() {
           👩‍🏫
         </Typography>
 
-        <Button variant="contained" color="primary" onClick={randomize}>
+        <Button variant="contained" color="primary" onClick={randomize} disableRipple="true">
           Make random pairs
         </Button>
         {pairs.map((pair, i) => (
