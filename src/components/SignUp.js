@@ -14,6 +14,7 @@ const SignUp = ({ history }) => {
   const [password, setPassword] = useState("");
 
   const handleSignUp = e => {
+    // additional user fields can be initiated here
     e.preventDefault();
     firebase
       .auth()
@@ -25,7 +26,12 @@ const SignUp = ({ history }) => {
           .doc(cred.user.uid)
           .set({
             email,
-            password
+            password,
+            instructor: 0,
+            interviewer: 0,
+            interviewee: 0,
+            AMReacto: false,
+            PMReacto: false
           })
           .then(() => {
             history.push("/");
