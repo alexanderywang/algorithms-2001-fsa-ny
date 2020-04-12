@@ -5,6 +5,7 @@ import {
   Grid,
   Paper,
   Typography,
+  Link,
   List,
   ListItem,
   ListItemIcon,
@@ -12,6 +13,7 @@ import {
   Checkbox,
   Button
 } from "@material-ui/core";
+import reacto from "../reacto.png";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -129,6 +131,15 @@ export default function UserPage({ user }) {
           </List>
           <Button type="submit">Submit</Button>
         </form>
+      </Grid>
+      <Grid xs={6} container direction="row">
+        <Grid>
+          <img alt="reacto" src={reacto} style={{ width: "100%" }} />
+
+          <Link href="https://www.fullstackacademy.com/blog/whiteboard-coding-interviews-a-6-step-process-to-solve-any-problem">
+            Fullstack REACTO
+          </Link>
+        </Grid>
       </Grid>
     </Grid>
   );

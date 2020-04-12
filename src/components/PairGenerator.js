@@ -86,7 +86,7 @@ function PairGenerator() {
 
         <Button
           variant="contained"
-          color="primary"
+          color="#474747"
           onClick={randomize}
           disableRipple="true"
         >
@@ -108,7 +108,7 @@ function PairGenerator() {
       <Grid xs={6} container direction="row">
         <Button
           variant="contained"
-          color="primary"
+          color="#474747"
           onClick={getPairs}
           disableRipple="true"
         >
