@@ -28,9 +28,9 @@ function PairGenerator() {
       .get()
       .then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
-          var cityRef = db.collection("cities").doc(doc.id);
+          var userRef = db.collection("Users").doc(doc.id);
 
-          return cityRef.update({
+          return userRef.update({
             AMReacto: false,
             PMReacto: false
           });
