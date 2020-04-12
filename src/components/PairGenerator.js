@@ -200,7 +200,7 @@ function PairGenerator() {
           </Link>
         </Grid>
         {/* Admin ONLY */}
-        {/* <Grid>
+        <Grid>
           <Button
             variant="contained"
             color="#474747"
@@ -209,14 +209,14 @@ function PairGenerator() {
           >
             1. Get AM Participants
           </Button>
-          <Button
+          {/* <Button
             variant="contained"
             color="#474747"
             onClick={updateStats}
             disableRipple="true"
           >
             2. update everyone's interview stats
-          </Button>
+          </Button> */}
           <Button
             variant="contained"
             color="#2b2d2f"
@@ -225,24 +225,24 @@ function PairGenerator() {
           >
             3. Get PM Participants
           </Button>
-          <Button
+          {/* <Button
             variant="contained"
             color="#474747"
             onClick={updateStats}
             disableRipple="true"
           >
             4. update everyone's interview stats
-          </Button>
+          </Button> */}
           <Divider />
-          <Button
+          {/* <Button
             variant="contained"
             color="#474747"
             onClick={resetChoices}
             disableRipple="true"
           >
             5. Reset all choices AFTER assigning pairs for the day
-          </Button>
-        </Grid> */}
+          </Button> */}
+        </Grid>
         <Divider />
       </Grid>
     </Grid>
