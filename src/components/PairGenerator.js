@@ -22,11 +22,42 @@ function PairGenerator() {
   const [pairs, setPairs] = useState([]);
   const [grads, setGrads] = useState([]);
 
-  const getPairs = async () => {
+  const resetChoices = () => {
+    //update all users to reflect AMReacto, PMReacto: falseå
+    db.collection("Users")
+      .get()
+      .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+          var cityRef = db.collection("cities").doc(doc.id);
+
+          return cityRef.update({
+            AMReacto: false,
+            PMReacto: false
+          });
+        });
+      });
+  };
+  const getAMPairs = async () => {
     const participants = [];
     await db
       .collection("Users")
       .where("AMReacto", "==", true)
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          participants.push(doc.data().userName);
+          setGrads([...participants]);
+        });
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+  const getPMPairs = async () => {
+    const participants = [];
+    await db
+      .collection("Users")
+      .where("PMReacto", "==", true)
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {
@@ -51,10 +82,20 @@ function PairGenerator() {
 
   const splitPairs = array => {
     const pairs = [];
+    const interviewers = [];
+    const interviewees = [];
     for (let i = 0; i < array.length; i += 2) {
       let pair = array.slice(i, i + 2);
       pairs.push(pair);
+      interviewees.push(pair[0]);
+      interviewers.push(pair[1]);
     }
+    // pairs.forEach(pair => {
+    //   interviewees.push(pair[0]);
+    //   interviewers.push(pair[1]);
+    // });
+    console.log("PairGenerator -> interviewers", interviewers);
+    console.log("PairGenerator -> interviewees", interviewees);
     setPairs(pairs);
   };
   console.log("PairGenerator -> grads", grads);
@@ -109,10 +150,18 @@ function PairGenerator() {
         <Button
           variant="contained"
           color="#474747"
-          onClick={getPairs}
+          onClick={getAMPairs}
           disableRipple="true"
         >
-          Get Participants
+          Get AM Participants
+        </Button>
+        <Button
+          variant="contained"
+          color="#2b2d2f"
+          onClick={getPMPairs}
+          disableRipple="true"
+        >
+          Get PM Participants
         </Button>
         <Grid>
           <img alt="reacto" src={reacto} style={{ width: "100%" }} />
@@ -121,6 +170,15 @@ function PairGenerator() {
             Fullstack REACTO
           </Link>
         </Grid>
+        <Divider />
+        <Button
+          variant="contained"
+          color="#474747"
+          onClick={resetChoices}
+          disableRipple="true"
+        >
+          Reset
+        </Button>
       </Grid>
     </Grid>
   );

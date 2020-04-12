@@ -108,7 +108,7 @@ export default function UserPage({ user }) {
         <form onSubmit={handleSubmit}>
           <Typography variant="h5">Sign up by 8 PM for tomorrow</Typography>
           <List className={classes.root}>
-            {["9:30 AM REACTO", "PM REACTO"].map((value, i) => {
+            {["AM REACTO", "PM REACTO"].map((value, i) => {
               const labelId = `checkbox-list-label-${value}`;
 
               return (
