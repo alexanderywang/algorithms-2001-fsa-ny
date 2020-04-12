@@ -11,6 +11,7 @@ import {
 
 const SignUp = ({ history }) => {
   const [email, setEmail] = useState("");
+  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSignUp = e => {
@@ -26,6 +27,7 @@ const SignUp = ({ history }) => {
           .doc(cred.user.uid)
           .set({
             email,
+            userName,
             password,
             instructor: 0,
             interviewer: 0,
@@ -82,6 +84,20 @@ const SignUp = ({ history }) => {
                 id="email"
                 value={email}
                 onChange={e => setEmail(e.target.value)}
+              />
+            </DialogContent>
+            <DialogContent
+              display="flex"
+              margin="auto"
+              width="fit-content"
+              backgroundColor="#fff"
+            >
+              <TextField
+                required
+                label="UserName"
+                id="userName"
+                value={userName}
+                onChange={e => setUserName(e.target.value)}
               />
             </DialogContent>
             <DialogContent

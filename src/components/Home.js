@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Grid, Typography } from "@material-ui/core";
 
 const Home = ({ user }) => {
+  console.log("Home -> user", user);
   return (
     <Grid container direction="column" style={{ marginTop: "10em" }}>
       <Grid item>
