@@ -15,7 +15,7 @@ const Home = ({ user }) => {
           <Grid item>
             <Typography
               variant="h4"
-              style={{ marginRight: "5px" }}
+              style={{ marginRight: "5px", color: "#000" }}
               gutterBottom
             >
               Welcome{" "}
