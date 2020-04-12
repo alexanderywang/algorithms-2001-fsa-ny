@@ -46,7 +46,7 @@ let questions = [
 ];
 
 let links = [
-  "https://www.themuse.com/advice/30-behavioral-interview-questions-you-should-be-ready-to-answer.com/",
+  "https://www.themuse.com/advice/30-behavioral-interview-questions-you-should-be-ready-to-answer",
   "https://docs.google.com/document/d/1sUc4jn3JgenOAg49OG7adQxGet0nzz-wWhTJqNT1628/edit"
 ];
 
