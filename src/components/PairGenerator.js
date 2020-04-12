@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Grid, Typography, Divider, Button, Link } from "@material-ui/core";
 import PeopleIcon from "@material-ui/icons/People";
 import reacto from "../reacto.png";
-import { db } from "../config/firebase";
+import { db, firebase } from "../config/firebase";
+import { ConsoleWriter } from "istanbul-lib-report";
 
 function PairGenerator() {
   // const grads = [
@@ -21,8 +22,8 @@ function PairGenerator() {
   // ];
   const [pairs, setPairs] = useState([]);
   const [grads, setGrads] = useState([]);
-
-
+  const interviewers = [];
+  const interviewees = [];
   const resetChoices = () => {
     //update all users to reflect AMReacto, PMReacto: falseå
     db.collection("Users")
@@ -37,6 +38,7 @@ function PairGenerator() {
           });
         });
       });
+    console.log("Reset");
   };
   const getAMPairs = async () => {
     const participants = [];
@@ -83,26 +85,66 @@ function PairGenerator() {
 
   const splitPairs = array => {
     const pairs = [];
-    const interviewers = [];
-    const interviewees = [];
+
     for (let i = 0; i < array.length; i += 2) {
       let pair = array.slice(i, i + 2);
       pairs.push(pair);
       interviewers.push(pair[0]);
       interviewees.push(pair[1]);
     }
-    // pairs.forEach(pair => {
-    //   interviewees.push(pair[0]);
-    //   interviewers.push(pair[1]);
-    // });
+
     console.log("PairGenerator -> interviewers", interviewers);
     console.log("PairGenerator -> interviewees", interviewees);
     setPairs(pairs);
   };
   console.log("PairGenerator -> grads", grads);
-  const updateStats = () => {
-    
-  }
+  const updateStats = async () => {
+    //update instructor count
+    await db
+      .collection("Users")
+      .where("userName", "==", "instructor")
+      .get()
+      .then(doc => {
+        console.log(doc.id);
+        db.collection("Users")
+          .doc(doc.id)
+          .update({
+            instructor: firebase.firestore.FieldValue.increment(1)
+          });
+      });
+    //update interviewer count
+    interviewers.forEach(async interviewer => {
+      await db
+        .collection("Users")
+        .where("userName", "==", "interviewer")
+        .get()
+        .then(doc => {
+          console.log(doc.id);
+          db.collection("Users")
+            .doc(doc.id)
+            .update({
+              interviewer: firebase.firestore.FieldValue.increment(1)
+            });
+        });
+    });
+    //update interviewee count
+    interviewees.forEach(async interviewee => {
+      await db
+        .collection("Users")
+        .where("userName", "==", "interviewee")
+        .get()
+        .then(doc => {
+          console.log(doc.id);
+          db.collection("Users")
+            .doc(doc.id)
+            .update({
+              interviewee: firebase.firestore.FieldValue.increment(1)
+            });
+        });
+    });
+    console.log("updated");
+  };
+  const instructor = grads[Math.floor(Math.random() * grads.length)];
   if (!pairs) return <Grid>No pairs yet</Grid>;
   return (
     <Grid
@@ -125,8 +167,7 @@ function PairGenerator() {
         </Typography>
 
         <Typography variant="h5" fontFamily="Roboto" lineHeight="4">
-          LEAD INSTRUCTOR: 👨‍🏫 {grads[Math.floor(Math.random() * grads.length)]}{" "}
-          👩‍🏫
+          LEAD INSTRUCTOR: 👨‍🏫 {instructor} 👩‍🏫
         </Typography>
 
         <Button
@@ -151,22 +192,6 @@ function PairGenerator() {
       </Grid>
 
       <Grid xs={6} container direction="row">
-        <Button
-          variant="contained"
-          color="#474747"
-          onClick={getAMPairs}
-          disableRipple="true"
-        >
-          Get AM Participants
-        </Button>
-        <Button
-          variant="contained"
-          color="#2b2d2f"
-          onClick={getPMPairs}
-          disableRipple="true"
-        >
-          Get PM Participants
-        </Button>
         <Grid>
           <img alt="reacto" src={reacto} style={{ width: "100%" }} />
 
@@ -174,24 +199,51 @@ function PairGenerator() {
             Fullstack REACTO
           </Link>
         </Grid>
+        {/* Admin ONLY */}
+        {/* <Grid>
+          <Button
+            variant="contained"
+            color="#474747"
+            onClick={getAMPairs}
+            disableRipple="true"
+          >
+            1. Get AM Participants
+          </Button>
+          <Button
+            variant="contained"
+            color="#474747"
+            onClick={updateStats}
+            disableRipple="true"
+          >
+            2. update everyone's interview stats
+          </Button>
+          <Button
+            variant="contained"
+            color="#2b2d2f"
+            onClick={getPMPairs}
+            disableRipple="true"
+          >
+            3. Get PM Participants
+          </Button>
+          <Button
+            variant="contained"
+            color="#474747"
+            onClick={updateStats}
+            disableRipple="true"
+          >
+            4. update everyone's interview stats
+          </Button>
+          <Divider />
+          <Button
+            variant="contained"
+            color="#474747"
+            onClick={resetChoices}
+            disableRipple="true"
+          >
+            5. Reset all choices AFTER assigning pairs for the day
+          </Button>
+        </Grid> */}
         <Divider />
-        {/* <Button
-          variant="contained"
-          color="#474747"
-          onClick={resetChoices}
-          disableRipple="true"
-        >
-          Reset all choices AFTER assigning pairs for the day
-        </Button> */}
-        <Divider />
-        <Button
-          variant="contained"
-          color="#474747"
-          onClick={updateStats}
-          disableRipple="true"
-        >
-          update everyone's interview stats
-        </Button>
       </Grid>
     </Grid>
   );
