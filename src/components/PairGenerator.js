@@ -177,7 +177,7 @@ function PairGenerator() {
           onClick={resetChoices}
           disableRipple="true"
         >
-          Reset
+          Reset all choices AFTER assigning pairs for the day
         </Button>
       </Grid>
     </Grid>
