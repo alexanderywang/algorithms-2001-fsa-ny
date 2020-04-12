@@ -119,6 +119,12 @@ export default function Header({ user }) {
             <Tab
               className={classes.tab}
               component={Link}
+              to="/complexity"
+              label="Complexity"
+            />
+            <Tab
+              className={classes.tab}
+              component={Link}
               to="/pairgenerator"
               label="Pair Generator"
             />
