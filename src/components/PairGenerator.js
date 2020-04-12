@@ -22,6 +22,7 @@ function PairGenerator() {
   const [pairs, setPairs] = useState([]);
   const [grads, setGrads] = useState([]);
 
+
   const resetChoices = () => {
     //update all users to reflect AMReacto, PMReacto: falseå
     db.collection("Users")
@@ -87,8 +88,8 @@ function PairGenerator() {
     for (let i = 0; i < array.length; i += 2) {
       let pair = array.slice(i, i + 2);
       pairs.push(pair);
-      interviewees.push(pair[0]);
-      interviewers.push(pair[1]);
+      interviewers.push(pair[0]);
+      interviewees.push(pair[1]);
     }
     // pairs.forEach(pair => {
     //   interviewees.push(pair[0]);
@@ -99,6 +100,9 @@ function PairGenerator() {
     setPairs(pairs);
   };
   console.log("PairGenerator -> grads", grads);
+  const updateStats = () => {
+    
+  }
   if (!pairs) return <Grid>No pairs yet</Grid>;
   return (
     <Grid
@@ -171,13 +175,22 @@ function PairGenerator() {
           </Link>
         </Grid>
         <Divider />
-        <Button
+        {/* <Button
           variant="contained"
           color="#474747"
           onClick={resetChoices}
           disableRipple="true"
         >
           Reset all choices AFTER assigning pairs for the day
+        </Button> */}
+        <Divider />
+        <Button
+          variant="contained"
+          color="#474747"
+          onClick={updateStats}
+          disableRipple="true"
+        >
+          update everyone's interview stats
         </Button>
       </Grid>
     </Grid>
