@@ -23,9 +23,9 @@ const useStyles = makeStyles(theme => ({
 
 export default function UserPage({ user }) {
   const classes = useStyles();
-  const [checked, setChecked] = useState([]);
 
   const [foundUser, setFoundUser] = useState("");
+  const [checked, setChecked] = useState([]);
   useEffect(() => {
     if (user) {
       const response = async () => {
@@ -33,8 +33,8 @@ export default function UserPage({ user }) {
           .collection("Users")
           .doc(`${user.uid}`)
           .get()
-          .then(async doc => {
-            await setFoundUser(doc.data());
+          .then(doc => {
+            setFoundUser(doc.data());
           })
           .catch(err => {
             console.error(err);
@@ -42,7 +42,7 @@ export default function UserPage({ user }) {
       };
       response();
     }
-  }, []);
+  }, [user]);
 
   const handleToggle = value => () => {
     const currentIndex = checked.indexOf(value);
@@ -56,15 +56,18 @@ export default function UserPage({ user }) {
 
     setChecked(newChecked);
   };
-  const onSubmit = async e => {
+  const handleSubmit = async e => {
     e.preventDefault();
+    console.log("submitting!");
     await db
       .collection("Users")
       .doc(`${user.uid}`)
       .update({
-        AMReacto: checked.includes("AM Reacto"),
-        PMReacto: checked.includes("PM Reacto")
-      }).then(response => console.log("updated"))
+        AMReacto: !!checked.includes("AM REACTO"),
+        PMReacto: !!checked.includes("PM REACTO")
+      })
+      .then(response => console.log("updated"));
+    setChecked([]);
   };
   console.log("UserPage -> checked", checked);
   const { interviewer, interviewee, instructor, email } = foundUser;
@@ -93,37 +96,39 @@ export default function UserPage({ user }) {
         item
         xs={4}
       >
-        <Typography variant="h5">Sign up</Typography>
-        <List className={classes.root}>
-          {["AM REACTO", "PM REACTO"].map((value, i) => {
-            const labelId = `checkbox-list-label-${value}`;
+        <form onSubmit={handleSubmit}>
+          <Typography variant="h5">Sign up</Typography>
+          <List className={classes.root}>
+            {["AM REACTO", "PM REACTO"].map((value, i) => {
+              const labelId = `checkbox-list-label-${value}`;
 
-            return (
-              <ListItem
-                key={i}
-                role={undefined}
-                dense
-                button
-                onClick={handleToggle(value)}
-              >
-                <ListItemIcon>
-                  <Checkbox
-                    edge="start"
-                    checked={checked.indexOf(value) !== -1}
-                    tabIndex={-1}
-                    disableRipple
-                    style={{
-                      color: "#2b2d2f"
-                    }}
-                    inputProps={{ "aria-labelledby": labelId }}
-                  />
-                </ListItemIcon>
-                <ListItemText id={labelId} primary={`${value}`} />
-              </ListItem>
-            );
-          })}
-        </List>
-        <Button onSubmit={onSubmit}>Submit</Button>
+              return (
+                <ListItem
+                  key={i}
+                  role={undefined}
+                  dense
+                  button
+                  onClick={handleToggle(value)}
+                >
+                  <ListItemIcon>
+                    <Checkbox
+                      edge="start"
+                      checked={checked.indexOf(value) !== -1}
+                      tabIndex={-1}
+                      disableRipple
+                      style={{
+                        color: "#2b2d2f"
+                      }}
+                      inputProps={{ "aria-labelledby": labelId }}
+                    />
+                  </ListItemIcon>
+                  <ListItemText id={labelId} primary={`${value}`} />
+                </ListItem>
+              );
+            })}
+          </List>
+          <Button type="submit">Submit</Button>
+        </form>
       </Grid>
     </Grid>
   );
