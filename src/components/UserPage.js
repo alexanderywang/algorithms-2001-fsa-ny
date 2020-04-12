@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { db } from "../config/firebase";
 import {
+  Dialog,
+  Divider,
   Grid,
   Paper,
   Typography,
@@ -28,6 +30,7 @@ export default function UserPage({ user }) {
 
   const [foundUser, setFoundUser] = useState("");
   const [checked, setChecked] = useState([]);
+  const [open, setOpen] = useState(false);
   useEffect(() => {
     if (user) {
       const response = async () => {
@@ -45,7 +48,9 @@ export default function UserPage({ user }) {
       response();
     }
   }, [user]);
-
+  const handleCancel = e => {
+    setOpen(false);
+  };
   const handleToggle = value => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
@@ -70,9 +75,10 @@ export default function UserPage({ user }) {
       })
       .then(response => console.log("updated"));
     setChecked([]);
+    setOpen(true);
   };
   console.log("UserPage -> checked", checked);
-  const { interviewer, interviewee, instructor, email } = foundUser;
+  const { interviewer, interviewee, instructor, email, userName } = foundUser;
   return (
     <Grid container flexGrow="1" spacing={4}>
       <Grid
@@ -84,7 +90,8 @@ export default function UserPage({ user }) {
         xs={4}
       >
         <Paper>
-          <Typography variant="h3">{email}</Typography>
+          <Typography variant="h3">{userName}</Typography>
+          <Divider />
           <Typography>Turns as instructor: {instructor}</Typography>
           <Typography>Turns as intervierwer: {interviewer}</Typography>
           <Typography>Turns as intervierwee: {interviewee}</Typography>
@@ -99,9 +106,9 @@ export default function UserPage({ user }) {
         xs={4}
       >
         <form onSubmit={handleSubmit}>
-          <Typography variant="h5">Sign up</Typography>
+          <Typography variant="h5">Sign up by 8 PM for tomorrow</Typography>
           <List className={classes.root}>
-            {["AM REACTO", "PM REACTO"].map((value, i) => {
+            {["9:30 AM REACTO", "PM REACTO"].map((value, i) => {
               const labelId = `checkbox-list-label-${value}`;
 
               return (
@@ -141,6 +148,27 @@ export default function UserPage({ user }) {
           </Link>
         </Grid>
       </Grid>
+      <Dialog
+        open={open}
+        onClose={handleCancel}
+        aria-labelledby="form-dialog-title"
+      >
+        <Paper style={{ backgroundColor: "#fff" }}>
+          <Typography
+            id="form-dialog-title"
+            align="center"
+            style={{
+              color: "#000",
+              fontSize: 18,
+              fontFamily: "Roboto",
+              lineHeight: 3
+            }}
+          >
+            THANKS FOR PARTICIPATING. RANDOM PAIRS WILL BE MADE AND A GIST WILL
+            BE SENT OUT BY 8PM
+          </Typography>
+        </Paper>
+      </Dialog>
     </Grid>
   );
 }
