@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
+  Button,
   Grid,
   Link,
   List,
@@ -62,6 +63,11 @@ const useStyles = makeStyles(theme => ({
 export default function Behavioral() {
   const classes = useStyles();
   const [dense, setDense] = useState(false);
+  const [random, setRandom] = useState("");
+
+  const randomQ = () => {
+    setRandom(questions[Math.floor(Math.random() * questions.length)]);
+  };
 
   return (
     <Grid container direction="row" justify="center" alignItems="flex-start">
@@ -89,6 +95,17 @@ export default function Behavioral() {
             );
           })}
         </List>
+        <Button
+          variant="contained"
+          color="#474747"
+          onClick={randomQ}
+          disableRipple="true"
+        >
+          ? Random Question ?
+        </Button>
+        <Grid>
+          <Typography>{random}</Typography>
+        </Grid>
       </Grid>
       <Grid
         item
