@@ -1,26 +1,43 @@
 import React, { useState } from "react";
-// import { Link } from "react-router-dom";
 import { Grid, Typography, Divider, Button, Link } from "@material-ui/core";
 import PeopleIcon from "@material-ui/icons/People";
 import reacto from "../reacto.png";
+import { db } from "../config/firebase";
 
 function PairGenerator() {
-  const grads = [
-    "Alex",
-    "Stas",
-    "🍔 Yan 👑",
-    "April",
-    "Max",
-    "mark",
-    "Mike D",
-    "Nelson",
-    "AAron",
-    "Carlos",
-    "Leslie",
-    "Peter"
-  ];
+  // const grads = [
+  //   "Alex",
+  //   "Stas",
+  //   "🍔 Yan 👑",
+  //   "April",
+  //   "Max",
+  //   "mark",
+  //   "Mike D",
+  //   "Nelson",
+  //   "AAron",
+  //   "Carlos",
+  //   "Leslie",
+  //   "Peter"
+  // ];
   const [pairs, setPairs] = useState([]);
+  const [grads, setGrads] = useState([]);
 
+  const getPairs = async () => {
+    const participants = [];
+    await db
+      .collection("Users")
+      .where("AMReacto", "==", true)
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          participants.push(doc.data());
+          setGrads([...participants]);
+        });
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
   const randomize = () => {
     let array = grads.slice();
     for (let i = 0; i < array.length; i++) {
@@ -40,6 +57,7 @@ function PairGenerator() {
     }
     setPairs(pairs);
   };
+  console.log("PairGenerator -> grads", grads);
   if (!pairs) return <Grid>No pairs yet</Grid>;
   return (
     <Grid
@@ -88,6 +106,14 @@ function PairGenerator() {
       </Grid>
 
       <Grid xs={6} container direction="row">
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={getPairs}
+          disableRipple="true"
+        >
+          Get Participants
+        </Button>
         <Grid>
           <img alt="reacto" src={reacto} style={{ width: "100%" }} />
 
