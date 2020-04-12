@@ -126,7 +126,7 @@ export default function Header({ user }) {
               className={classes.tab}
               component={Link}
               to="/behavioral"
-              label="Behavioral"
+              label="Behavioral/Interview Prep"
             />
             <Tab
               className={classes.tab}
