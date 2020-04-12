@@ -1,5 +1,3 @@
-import { createMuiTheme } from "@material-ui/core/styles";
-
 const white = "#FFF";
 const black = "#161617";
 const gray = "#F8F8F9";

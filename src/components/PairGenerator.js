@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 // import { Link } from "react-router-dom";
-import {
-  Grid,
-  Typography,
-  Divider,
-  Paper,
-  Button,
-  Link
-} from "@material-ui/core";
+import { Grid, Typography, Divider, Button, Link } from "@material-ui/core";
 import PeopleIcon from "@material-ui/icons/People";
 import reacto from "../reacto.png";
 

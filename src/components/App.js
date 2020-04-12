@@ -6,9 +6,14 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import Header from "./Header";
 import PairGenerator from "./PairGenerator";
+import UserPage from "./UserPage";
 import { useTheme } from "./ThemeContext";
 import { AuthProvider } from "./Auth";
 import { firebase } from "../config/firebase.js";
+import { Button, Grid, Link } from "@material-ui/core";
+import mymui from "../mymui.png";
+import Brightness4Icon from "@material-ui/icons/Brightness4";
+import Brightness4OutlinedIcon from "@material-ui/icons/Brightness4Outlined";
 
 const Wrapper = styled("div")`
   background: ${props => props.theme.background};
@@ -30,12 +35,12 @@ const App = () => {
   const themeState = useTheme();
   return (
     <Wrapper>
-      <h1>Dark Mode example</h1>
-      <div>
-        <button onClick={() => themeState.toggle()}>
-          {themeState.dark ? "Light Mode" : "Dark Mode"}
-        </button>
-      </div>
+      <Grid style={{ paddingTop: 64 }}>
+        <Button onClick={() => themeState.toggle()}>
+          {/* {themeState.dark ? "Light Mode" : "Dark Mode"} */}
+          {themeState.dark ? <Brightness4OutlinedIcon /> : <Brightness4Icon />}
+        </Button>
+      </Grid>
       <AuthProvider value={user}>
         <BrowserRouter>
           <Header user={user} />
@@ -44,9 +49,21 @@ const App = () => {
             <Route exact path="/signup" component={SignUp} />
             <Route exact path="/pairgenerator" component={PairGenerator} />
             <Route exact path="/" component={() => <Home user={user} />} />
+            <Route
+              exact
+              path="/userpage"
+              component={() => <UserPage user={user} />}
+            />
           </Switch>
         </BrowserRouter>
       </AuthProvider>
+      <Grid style={{ paddingTop: 330 }}>
+        Influenced by:
+        <Link href="https://my-mui.com">
+          {"  "}
+          <img alt="mymui" src={mymui} />
+        </Link>
+      </Grid>
     </Wrapper>
   );
 };

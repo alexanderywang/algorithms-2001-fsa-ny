@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Grid, Typography } from "@material-ui/core";
 
 const Home = ({ user }) => {
@@ -39,12 +40,16 @@ const Home = ({ user }) => {
       </Grid>
 
       <Grid container justify="center" alignItems="center">
-        <Typography
-          style={{ marginTop: "10px", color: "#818181" }}
-          align="center"
-        >
-          Practice your algos
-        </Typography>
+        {user && (
+          <Link to="/userpage" style={{ textDecoration: "none" }}>
+            <Typography
+              style={{ marginTop: "10px", color: "#818181" }}
+              align="center"
+            >
+              Practice your algos
+            </Typography>
+          </Link>
+        )}
       </Grid>
     </Grid>
   );
