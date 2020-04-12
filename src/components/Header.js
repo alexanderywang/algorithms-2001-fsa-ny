@@ -107,6 +107,18 @@ export default function Header({ user }) {
             <Tab
               className={classes.tab}
               component={Link}
+              to="/format"
+              label="Format"
+            />
+            <Tab
+              className={classes.tab}
+              component={Link}
+              to="/userpage"
+              label="User Page"
+            />
+            <Tab
+              className={classes.tab}
+              component={Link}
               to="/pairgenerator"
               label="Pair Generator"
             />

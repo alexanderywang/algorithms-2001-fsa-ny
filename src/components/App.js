@@ -7,6 +7,7 @@ import SignUp from "./SignUp";
 import Header from "./Header";
 import PairGenerator from "./PairGenerator";
 import UserPage from "./UserPage";
+import Format from "./Format";
 import { useTheme } from "./ThemeContext";
 import { AuthProvider } from "./Auth";
 import { firebase } from "../config/firebase.js";
@@ -47,6 +48,7 @@ const App = () => {
           <Switch>
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={SignUp} />
+            <Route exact path="/format" component={Format} />
             <Route exact path="/pairgenerator" component={PairGenerator} />
             <Route exact path="/" component={() => <Home user={user} />} />
             <Route
