@@ -30,7 +30,7 @@ function PairGenerator() {
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {
-          participants.push(doc.data());
+          participants.push(doc.data().email);
           setGrads([...participants]);
         });
       })
