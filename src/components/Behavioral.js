@@ -13,6 +13,7 @@ import {
   Typography
 } from "@material-ui/core";
 import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
+import bootcampElements from "../bootcampElements.png";
 
 let launchDayNonTechnical = [
   "Why did you decide to become a programmer?",
@@ -287,6 +288,15 @@ export default function Behavioral() {
           <Typography>{randomP}</Typography>
         </Grid>
       </Grid>
+      {/* <Grid xs={4} container direction="row" >
+        <Grid>
+          <img
+            alt="bootcampElements"
+            src={bootcampElements}
+            style={{ width: "100%" }}
+          />
+        </Grid>
+      </Grid> */}
     </Grid>
   );
 }

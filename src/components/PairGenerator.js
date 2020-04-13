@@ -22,6 +22,7 @@ function PairGenerator() {
   // ];
   const [pairs, setPairs] = useState([]);
   const [grads, setGrads] = useState([]);
+  const [time, setTime] = useState("");
   const interviewers = [];
   const interviewees = [];
   const resetChoices = () => {
@@ -55,6 +56,7 @@ function PairGenerator() {
       .catch(err => {
         console.error(err);
       });
+    setTime("AM");
   };
   const getPMPairs = async () => {
     const participants = [];
@@ -71,6 +73,7 @@ function PairGenerator() {
       .catch(err => {
         console.error(err);
       });
+    setTime("PM");
   };
   const randomize = () => {
     let array = grads.slice();
@@ -167,7 +170,7 @@ function PairGenerator() {
         </Typography>
 
         <Typography variant="h5" fontFamily="Roboto" lineHeight="4">
-          LEAD INSTRUCTOR: 👨‍🏫 {instructor} 👩‍🏫
+          {time} REACTO LEAD INSTRUCTOR: 👨‍🏫 {instructor} 👩‍🏫
         </Typography>
 
         <Button
