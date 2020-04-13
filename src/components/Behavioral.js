@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Button,
+  Divider,
   Grid,
   Link,
   List,
@@ -12,6 +13,37 @@ import {
   Typography
 } from "@material-ui/core";
 import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
+
+let launchDayNonTechnical = [
+  "Why did you decide to become a programmer?",
+  "Do you prefer front-end or back-end programming?",
+  "What language do you prefer?",
+  "Would you learn other languages?",
+  "Why did you come to Fullstack?",
+  "When you are learning something new, what do you do first?",
+  "When do you ask questions?",
+  "What are you interested in? / What are you looking for?",
+  "Where do you see yourself in the future / in 5 years?"
+];
+
+let launchDayTechnical = [
+  "Why do you use react?",
+  "What are the advantages of using react?",
+  "What are some of the challenges around architecting a site w/ React & Redux?",
+  "What is Sequelize?",
+  "Identify a function that takes a number n and returns the nth number in the fibonacci sequence; discuss code that uses nested for loops to print out a multiplication table; discuss a time while working on your project when everything broke",
+  "How do you modularize your CSS files?",
+  "What’s the hardest issue you had to resolve recently, specifically in code.",
+  "When should a NoSQL database be used instead of a relational database, and vice versa?"
+];
+let launchDayProjects = [
+  "What challenges did you face?",
+  "What were some of the things you worked on?",
+  "What other features would you like to add?",
+  "What were some bugs you had and how did you fix it?",
+  "Why did you use a certain type of technology for your project?",
+  "Tell me about a conflict you had on a team."
+];
 
 let questions = [
   "Tell me about yourself and what got you interested in engineering?",
@@ -65,8 +97,8 @@ export default function Behavioral() {
   const [dense, setDense] = useState(false);
   const [random, setRandom] = useState("");
 
-  const randomQ = () => {
-    setRandom(questions[Math.floor(Math.random() * questions.length)]);
+  const randomQ = array => {
+    setRandom(array[Math.floor(Math.random() * array.length)]);
   };
 
   return (
@@ -98,7 +130,7 @@ export default function Behavioral() {
         <Button
           variant="contained"
           color="#474747"
-          onClick={randomQ}
+          onClick={() => randomQ(questions)}
           disableRipple="true"
         >
           ? Random Question ?
@@ -133,6 +165,115 @@ export default function Behavioral() {
             );
           })}
         </List>
+      </Grid>
+      <Divider />
+      <Grid
+        item
+        md={4}
+        spacing={2}
+        container
+        justify="center"
+        alignItems="flex-start"
+      >
+        <Typography variant="h6" className={classes.title}>
+          Launch Day Non-technical Questions
+        </Typography>
+
+        <List dense={dense}>
+          {launchDayNonTechnical.map((question, i) => {
+            return (
+              <ListItem key={i}>
+                <ListItemIcon>
+                  <DoubleArrowIcon />
+                </ListItemIcon>
+                <ListItemText>{`${question}`}</ListItemText>
+              </ListItem>
+            );
+          })}
+        </List>
+        <Button
+          variant="contained"
+          color="#474747"
+          onClick={() => randomQ(launchDayNonTechnical)}
+          disableRipple="true"
+        >
+          ? Random Non-technical Question ?
+        </Button>
+        <Grid>
+          <Typography>{random}</Typography>
+        </Grid>
+      </Grid>
+      <Grid
+        item
+        md={4}
+        spacing={2}
+        container
+        justify="center"
+        alignItems="flex-start"
+      >
+        <Typography variant="h6" className={classes.title}>
+          Launch Day Technical Questions
+        </Typography>
+
+        <List dense={dense}>
+          {launchDayTechnical.map((question, i) => {
+            return (
+              <ListItem key={i}>
+                <ListItemIcon>
+                  <DoubleArrowIcon />
+                </ListItemIcon>
+                <ListItemText>{`${question}`}</ListItemText>
+              </ListItem>
+            );
+          })}
+        </List>
+        <Button
+          variant="contained"
+          color="#474747"
+          onClick={() => randomQ(launchDayTechnical)}
+          disableRipple="true"
+        >
+          ? Random Technical Question ?
+        </Button>
+        <Grid>
+          <Typography>{random}</Typography>
+        </Grid>
+      </Grid>
+      <Grid
+        item
+        md={4}
+        spacing={2}
+        container
+        justify="center"
+        alignItems="flex-start"
+      >
+        <Typography variant="h6" className={classes.title}>
+          Launch Day Project Questions
+        </Typography>
+
+        <List dense={dense}>
+          {launchDayProjects.map((question, i) => {
+            return (
+              <ListItem key={i}>
+                <ListItemIcon>
+                  <DoubleArrowIcon />
+                </ListItemIcon>
+                <ListItemText>{`${question}`}</ListItemText>
+              </ListItem>
+            );
+          })}
+        </List>
+        <Button
+          variant="contained"
+          color="#474747"
+          onClick={() => randomQ(launchDayProjects)}
+          disableRipple="true"
+        >
+          ? Random Project Question ?
+        </Button>
+        <Grid>
+          <Typography>{random}</Typography>
+        </Grid>
       </Grid>
     </Grid>
   );
