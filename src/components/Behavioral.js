@@ -96,9 +96,21 @@ export default function Behavioral() {
   const classes = useStyles();
   const [dense, setDense] = useState(false);
   const [random, setRandom] = useState("");
+  const [randomNT, setRandomNT] = useState("");
+  const [randomT, setRandomT] = useState("");
+  const [randomP, setRandomP] = useState("");
 
-  const randomQ = array => {
-    setRandom(array[Math.floor(Math.random() * array.length)]);
+  const randomQ = (array, type) => {
+    switch (type) {
+      case "nt":
+        return setRandomNT(array[Math.floor(Math.random() * array.length)]);
+      case "t":
+        return setRandomT(array[Math.floor(Math.random() * array.length)]);
+      case "p":
+        return setRandomP(array[Math.floor(Math.random() * array.length)]);
+      default:
+        return setRandom(array[Math.floor(Math.random() * array.length)]);
+    }
   };
 
   return (
@@ -130,7 +142,7 @@ export default function Behavioral() {
         <Button
           variant="contained"
           color="#474747"
-          onClick={() => randomQ(questions)}
+          onClick={() => randomQ(questions, "b")}
           disableRipple="true"
         >
           ? Random Question ?
@@ -194,13 +206,13 @@ export default function Behavioral() {
         <Button
           variant="contained"
           color="#474747"
-          onClick={() => randomQ(launchDayNonTechnical)}
+          onClick={() => randomQ(launchDayNonTechnical, "nt")}
           disableRipple="true"
         >
           ? Random Non-technical Question ?
         </Button>
         <Grid>
-          <Typography>{random}</Typography>
+          <Typography>{randomNT}</Typography>
         </Grid>
       </Grid>
       <Grid
@@ -230,13 +242,13 @@ export default function Behavioral() {
         <Button
           variant="contained"
           color="#474747"
-          onClick={() => randomQ(launchDayTechnical)}
+          onClick={() => randomQ(launchDayTechnical, "t")}
           disableRipple="true"
         >
           ? Random Technical Question ?
         </Button>
         <Grid>
-          <Typography>{random}</Typography>
+          <Typography>{randomT}</Typography>
         </Grid>
       </Grid>
       <Grid
@@ -266,13 +278,13 @@ export default function Behavioral() {
         <Button
           variant="contained"
           color="#474747"
-          onClick={() => randomQ(launchDayProjects)}
+          onClick={() => randomQ(launchDayProjects, "p")}
           disableRipple="true"
         >
           ? Random Project Question ?
         </Button>
         <Grid>
-          <Typography>{random}</Typography>
+          <Typography>{randomP}</Typography>
         </Grid>
       </Grid>
     </Grid>
