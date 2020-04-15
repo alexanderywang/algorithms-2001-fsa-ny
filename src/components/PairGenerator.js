@@ -23,6 +23,7 @@ function PairGenerator() {
   const [pairs, setPairs] = useState([]);
   const [grads, setGrads] = useState([]);
   const [time, setTime] = useState("");
+  const [instructor, setInstructor] = useState("");
   const interviewers = [];
   const interviewees = [];
   const resetChoices = () => {
@@ -99,6 +100,7 @@ function PairGenerator() {
     console.log("PairGenerator -> interviewers", interviewers);
     console.log("PairGenerator -> interviewees", interviewees);
     setPairs(pairs);
+    setInstructor(interviewers[0]);
   };
   console.log("PairGenerator -> grads", grads);
   const updateStats = async () => {
@@ -147,8 +149,9 @@ function PairGenerator() {
     });
     console.log("updated");
   };
-  const instructor = grads[Math.floor(Math.random() * grads.length)];
+
   if (!pairs) return <Grid>No pairs yet</Grid>;
+
   return (
     <Grid
       style={{ paddingTop: 64 }}
