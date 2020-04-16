@@ -6,26 +6,13 @@ import { db, firebase } from "../config/firebase";
 import { ConsoleWriter } from "istanbul-lib-report";
 
 function PairGenerator() {
-  // const grads = [
-  //   "Alex",
-  //   "Stas",
-  //   "🍔 Yan 👑",
-  //   "April",
-  //   "Max",
-  //   "mark",
-  //   "Mike D",
-  //   "Nelson",
-  //   "AAron",
-  //   "Carlos",
-  //   "Leslie",
-  //   "Peter"
-  // ];
   const [pairs, setPairs] = useState([]);
   const [grads, setGrads] = useState([]);
   const [time, setTime] = useState("");
   const [instructor, setInstructor] = useState("");
-  const interviewers = [];
-  const interviewees = [];
+  const [interviewers, setInterviewers] = useState([])
+  const [interviewees, setInterviewees] = useState([])
+
   const resetChoices = () => {
     //update all users to reflect AMReacto, PMReacto: false
     db.collection("Users")
@@ -42,6 +29,7 @@ function PairGenerator() {
       });
     console.log("Reset");
   };
+
   const getAMPairs = async () => {
     const participants = [];
     await db
@@ -59,6 +47,7 @@ function PairGenerator() {
       });
     setTime("AM");
   };
+
   const getPMPairs = async () => {
     const participants = [];
     await db
@@ -76,6 +65,7 @@ function PairGenerator() {
       });
     setTime("PM");
   };
+
   const randomize = () => {
     let array = grads.slice();
     for (let i = 0; i < array.length; i++) {
@@ -93,16 +83,16 @@ function PairGenerator() {
     for (let i = 0; i < array.length; i += 2) {
       let pair = array.slice(i, i + 2);
       pairs.push(pair);
-      interviewers.push(pair[0]);
-      interviewees.push(pair[1]);
     }
+    pairs.forEach(pair => {
+      setInterviewers(prevPairs => [...prevPairs, pair[0]])
+      setInterviewees(prevPairs => [...prevPairs, pair[1]])
+    })
 
-    console.log("PairGenerator -> interviewers", interviewers);
-    console.log("PairGenerator -> interviewees", interviewees);
     setPairs(pairs);
-    setInstructor(interviewers[0]);
+    setInstructor(pairs[0][0]);
   };
-  console.log("PairGenerator -> grads", grads);
+
   const updateStats = async instructorName => {
     //update instructor count
     await db
@@ -123,35 +113,45 @@ function PairGenerator() {
         console.error(err);
       });
     // //update interviewer count
-    // interviewers.forEach(async interviewer => {
-    //   await db
-    //     .collection("Users")
-    //     .where("userName", "==", "interviewer")
-    //     .get()
-    //     .then(doc => {
-    //       console.log(doc.id);
-    //       db.collection("Users")
-    //         .doc(doc.id)
-    //         .update({
-    //           interviewer: firebase.firestore.FieldValue.increment(1)
-    //         });
-    //     });
-    // });
+    interviewers.forEach(async interviewer => {
+      await db
+        .collection("Users")
+        .where("userName", "==", interviewer)
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(async doc => {
+            await db
+            .collection("Users")
+            .doc(doc.id)
+            .update({
+              interviewer: firebase.firestore.FieldValue.increment(1)
+            });
+          });
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    });
     // //update interviewee count
-    // interviewees.forEach(async interviewee => {
-    //   await db
-    //     .collection("Users")
-    //     .where("userName", "==", "interviewee")
-    //     .get()
-    //     .then(doc => {
-    //       console.log(doc.id);
-    //       db.collection("Users")
-    //         .doc(doc.id)
-    //         .update({
-    //           interviewee: firebase.firestore.FieldValue.increment(1)
-    //         });
-    //     });
-    // });
+    interviewees.forEach(async interviewee => {
+      await db
+        .collection("Users")
+        .where("userName", "==", interviewee)
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(async doc => {
+            await db
+            .collection("Users")
+            .doc(doc.id)
+            .update({
+              interviewee: firebase.firestore.FieldValue.increment(1)
+            });
+          });
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    });
     console.log("updated");
   };
 
@@ -220,14 +220,14 @@ function PairGenerator() {
           >
             1. Get AM Participants
           </Button>
-          <Button
+          {/* <Button
             variant="contained"
             color="#474747"
             onClick={() => updateStats(instructor)}
             disableRipple="true"
           >
             2. update everyone's interview stats
-          </Button>
+          </Button> */}
           <Button
             variant="contained"
             color="#2b2d2f"
