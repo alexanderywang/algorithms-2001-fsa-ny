@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Behavioral() {
+export default function Archive() {
   const classes = useStyles();
   const [dense, setDense] = useState(false);
   const [random, setRandom] = useState("");
