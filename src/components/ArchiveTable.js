@@ -370,7 +370,8 @@ export default function ArchiveTable() {
                           </IconButton>
                         </Tooltip>
                       </TableCell>
-                      <TableCell>
+                      {/* Admin Only */}
+                      {/* <TableCell>
                       <Tooltip title="Delete Theme">
                         <IconButton
                           aria-label="delete"
@@ -379,7 +380,7 @@ export default function ArchiveTable() {
                           <DeleteIcon />
                         </IconButton>
                       </Tooltip>
-                      </TableCell>
+                      </TableCell> */}
                     </TableRow>
                   );
                 })}
