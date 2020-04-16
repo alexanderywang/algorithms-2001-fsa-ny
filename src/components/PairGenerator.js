@@ -27,7 +27,7 @@ function PairGenerator() {
   const interviewers = [];
   const interviewees = [];
   const resetChoices = () => {
-    //update all users to reflect AMReacto, PMReacto: falseå
+    //update all users to reflect AMReacto, PMReacto: false
     db.collection("Users")
       .get()
       .then(function(querySnapshot) {
@@ -103,50 +103,52 @@ function PairGenerator() {
     setInstructor(interviewers[0]);
   };
   console.log("PairGenerator -> grads", grads);
-  const updateStats = async () => {
+  const updateStats = async instructorName => {
+    console.log("PairGenerator -> instructorName", instructorName);
     //update instructor count
     await db
       .collection("Users")
-      .where("userName", "==", "instructor")
+      .where("userName", "==", instructorName)
       .get()
-      .then(doc => {
-        console.log(doc.id);
-        db.collection("Users")
+      .then(async doc => {
+        console.log("instructor", doc[0], doc);
+        await db
+          .collection("Users")
           .doc(doc.id)
           .update({
             instructor: firebase.firestore.FieldValue.increment(1)
           });
       });
-    //update interviewer count
-    interviewers.forEach(async interviewer => {
-      await db
-        .collection("Users")
-        .where("userName", "==", "interviewer")
-        .get()
-        .then(doc => {
-          console.log(doc.id);
-          db.collection("Users")
-            .doc(doc.id)
-            .update({
-              interviewer: firebase.firestore.FieldValue.increment(1)
-            });
-        });
-    });
-    //update interviewee count
-    interviewees.forEach(async interviewee => {
-      await db
-        .collection("Users")
-        .where("userName", "==", "interviewee")
-        .get()
-        .then(doc => {
-          console.log(doc.id);
-          db.collection("Users")
-            .doc(doc.id)
-            .update({
-              interviewee: firebase.firestore.FieldValue.increment(1)
-            });
-        });
-    });
+    // //update interviewer count
+    // interviewers.forEach(async interviewer => {
+    //   await db
+    //     .collection("Users")
+    //     .where("userName", "==", "interviewer")
+    //     .get()
+    //     .then(doc => {
+    //       console.log(doc.id);
+    //       db.collection("Users")
+    //         .doc(doc.id)
+    //         .update({
+    //           interviewer: firebase.firestore.FieldValue.increment(1)
+    //         });
+    //     });
+    // });
+    // //update interviewee count
+    // interviewees.forEach(async interviewee => {
+    //   await db
+    //     .collection("Users")
+    //     .where("userName", "==", "interviewee")
+    //     .get()
+    //     .then(doc => {
+    //       console.log(doc.id);
+    //       db.collection("Users")
+    //         .doc(doc.id)
+    //         .update({
+    //           interviewee: firebase.firestore.FieldValue.increment(1)
+    //         });
+    //     });
+    // });
     console.log("updated");
   };
 
@@ -215,14 +217,14 @@ function PairGenerator() {
           >
             1. Get AM Participants
           </Button>
-          {/* <Button
+          <Button
             variant="contained"
             color="#474747"
-            onClick={updateStats}
+            onClick={() => updateStats(instructor)}
             disableRipple="true"
           >
             2. update everyone's interview stats
-          </Button> */}
+          </Button>
           <Button
             variant="contained"
             color="#2b2d2f"

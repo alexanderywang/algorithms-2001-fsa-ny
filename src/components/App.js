@@ -10,6 +10,7 @@ import UserPage from "./UserPage";
 import Format from "./Format";
 import Complexity from "./Complexity";
 import Behavioral from "./Behavioral";
+import Archive from "./Archive";
 import { useTheme } from "./ThemeContext";
 import { AuthProvider } from "./Auth";
 import { firebase } from "../config/firebase.js";
@@ -54,6 +55,7 @@ const App = () => {
             <Route exact path="/complexity" component={Complexity} />
             <Route exact path="/behavioral" component={Behavioral} />
             <Route exact path="/pairgenerator" component={PairGenerator} />
+            <Route exact path="/archive" component={Archive} />
             <Route exact path="/" component={() => <Home user={user} />} />
             <Route
               exact
