@@ -76,7 +76,6 @@ const headCells = [
     label: "Solution Link",
     columnAlignment: true,
     disablePadding: false
-    // format: value => value.toLocaleString()
   }
 ];
 
@@ -354,7 +353,7 @@ export default function ArchiveTable() {
                         padding="none"
                       >
                         {row.createdAt}
-                      </TableCell>
+                      </TableCell >
                       <Link target="_blank" href={`${row.archive}`}>
                         <TableCell align="left">{row.archive}</TableCell>
                       </Link>
