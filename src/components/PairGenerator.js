@@ -104,20 +104,23 @@ function PairGenerator() {
   };
   console.log("PairGenerator -> grads", grads);
   const updateStats = async instructorName => {
-    console.log("PairGenerator -> instructorName", instructorName);
     //update instructor count
     await db
       .collection("Users")
       .where("userName", "==", instructorName)
       .get()
-      .then(async doc => {
-        console.log("instructor", doc[0], doc);
-        await db
+      .then(snapshot => {
+        snapshot.forEach(async doc => {
+          await db
           .collection("Users")
           .doc(doc.id)
           .update({
             instructor: firebase.firestore.FieldValue.increment(1)
           });
+        });
+      })
+      .catch(err => {
+        console.error(err);
       });
     // //update interviewer count
     // interviewers.forEach(async interviewer => {
@@ -217,14 +220,14 @@ function PairGenerator() {
           >
             1. Get AM Participants
           </Button>
-          {/* <Button
+          <Button
             variant="contained"
             color="#474747"
             onClick={() => updateStats(instructor)}
             disableRipple="true"
           >
             2. update everyone's interview stats
-          </Button> */}
+          </Button>
           <Button
             variant="contained"
             color="#2b2d2f"
