@@ -41,11 +41,8 @@ export default function Behavioral() {
         .get()
         .then(snapshot => {
           snapshot.forEach(doc => {
-            console.log("response -> doc", doc.data());
             arch.push({ ...doc.data() });
             setArchives([...arch]);
-
-            // setArchives(prevArchives => [...prevArchives, archive]);
           });
         })
         .catch(err => {
@@ -57,7 +54,7 @@ export default function Behavioral() {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    console.log("handle submit", archive);
+
     await db
       .collection("Archives")
       .add({ archive, createdAt: new Date() })
@@ -155,16 +152,6 @@ export default function Behavioral() {
           </Grid>
         </Grid>
       </Grid>
-
-      {/* <Grid xs={4} container direction="row" >
-        <Grid>
-          <img
-            alt="bootcampElements"
-            src={bootcampElements}
-            style={{ width: "100%" }}
-          />
-        </Grid>
-      </Grid> */}
     </Grid>
   );
 }

@@ -217,14 +217,14 @@ function PairGenerator() {
           >
             1. Get AM Participants
           </Button>
-          <Button
+          {/* <Button
             variant="contained"
             color="#474747"
             onClick={() => updateStats(instructor)}
             disableRipple="true"
           >
             2. update everyone's interview stats
-          </Button>
+          </Button> */}
           <Button
             variant="contained"
             color="#2b2d2f"
