@@ -1,21 +1,21 @@
-import React from "react";
-import { Paper, Grid, Typography, List, ListItemText } from "@material-ui/core";
-import categories from "../categories.png";
+import React from 'react';
+import { Paper, Grid, Typography, List, ListItemText } from '@material-ui/core';
+import categories from '../categories.png';
 
 export default function UserPage() {
   return (
-    <Grid container flexGrow="1" spacing={4}>
+    <Grid container flexgrow='1' spacing={4}>
       <Grid
         container
-        direction="row"
-        justify="flex-start"
-        alignItems="center"
+        direction='row'
+        justify='flex-start'
+        alignItems='center'
         item
         xs={3}
       >
         <Paper>
           <Typography>
-            <b>Algos Format:</b>{" "}
+            <b>Algos Format:</b>{' '}
           </Typography>
           <List>
             <ListItemText /> People sign up day before.
@@ -47,14 +47,14 @@ export default function UserPage() {
             <ListItemText /> Also for medium+ difficulty, we can involve some
             pairs programming as we get better at the topics.
           </List>
-        </Paper>{" "}
+        </Paper>{' '}
       </Grid>
 
       <Grid
         container
-        direction="row"
-        justify="flex-start"
-        alignItems="center"
+        direction='row'
+        justify='flex-start'
+        alignItems='center'
         item
         xs={3}
       >
@@ -78,9 +78,9 @@ export default function UserPage() {
       </Grid>
       <Grid
         container
-        direction="row"
-        justify="flex-start"
-        alignItems="center"
+        direction='row'
+        justify='flex-start'
+        alignItems='center'
         item
         xs={3}
       >
@@ -90,15 +90,15 @@ export default function UserPage() {
       </Grid>
       <Grid
         container
-        direction="row"
-        justify="flex-start"
-        alignItems="center"
+        direction='row'
+        justify='flex-start'
+        alignItems='center'
         item
         xs={3}
       >
         <Paper>
           <Typography>educative.io Categories</Typography>
-          <img alt="categories" src={categories} style={{ width: "100%" }} />
+          <img alt='categories' src={categories} style={{ width: '100%' }} />
         </Paper>
       </Grid>
     </Grid>
