@@ -3,9 +3,7 @@ import { BarChart, CartesianGrid, Bar, XAxis, Cell } from 'recharts';
 import Button from '@material-ui/core/Button';
 import { Slider, Grid, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-const sleep = (milliseconds) => {
-  return new Promise((resolve) => setTimeout(resolve, milliseconds));
-};
+import layoutStypes from './sorting.module.scss';
 
 const PrettoSlider = withStyles({
   root: {
@@ -36,6 +34,15 @@ const PrettoSlider = withStyles({
     borderRadius: 4,
   },
 })(Slider);
+
+var cancelId; // a no-op to start with
+
+const sleep = (milliseconds) => {
+  return new Promise((resolve) => {
+    cancelId = setTimeout(resolve, milliseconds);
+  });
+};
+
 class SortingVisualizer extends React.Component {
   constructor() {
     super();
@@ -59,6 +66,7 @@ class SortingVisualizer extends React.Component {
         },
       ],
       speed: 500,
+      pause: false,
     };
     this.changedata = this.changedata.bind(this);
     this.dataChanged = this.dataChanged.bind(this);
@@ -97,7 +105,11 @@ class SortingVisualizer extends React.Component {
         }
         this.setState({ data: Array.from(array) });
 
-        await sleep(this.state.speed);
+        // await sleep(this.state.pause ? 5000 : 1000 - this.state.speed);
+
+        if (!this.state.pause) {
+          clearTimeout(cancelId);
+        }
         array[j + 1].compare = false;
       }
       array[i].compare = false;
@@ -105,21 +117,27 @@ class SortingVisualizer extends React.Component {
     }
     this.setState({ data: Array.from(array) });
   }
-  dataChanged(data) {
+  dataChanged(array) {
     this.setState({
-      data: data,
+      data: Array.from(array),
     });
-    console.log('the state', this.state.data);
+  }
+  pause() {
+    this.setState({
+      pause: !this.state.pause,
+    });
+    console.log(this.state.pause);
   }
   changedata(e) {
     e.preventDefault();
-    let array = this.state.data;
-    this.bubbleSort(array);
+    // let array = this.state.data;
+    // BubbleSort(array, this.dataChanged, this.state.speed);
+    this.bubbleSort(this.state.data);
   }
   render() {
     const colors = ['#0088FE', '#FF0000', '#FFBB28', '#FF8042'];
     return (
-      <div>
+      <div className={layoutStypes.container}>
         <h1>Bubble Sort</h1>
         <BarChart width={730} height={250} data={this.state.data}>
           <XAxis dataKey='name' />
@@ -134,17 +152,22 @@ class SortingVisualizer extends React.Component {
           </Bar>
         </BarChart>
 
-        <Grid container spacing={1} alignItems='center'>
-          <Grid item>
+        <Grid container spacing={3}>
+          <Grid item xs={4}>
             <Button onClick={(e) => this.changedata(e)}>Start</Button>
           </Grid>
-          <Grid item>
+          <Grid item xs={4}>
+            <Button onClick={() => this.pause()}>
+              {this.state.pause ? 'Resume' : 'Pause'}
+            </Button>
+          </Grid>
+          <Grid item xs={4}>
             <Button onClick={() => this.genernrateRandomArray()}>
               Random Array
             </Button>
           </Grid>
-          <Typography>Fast</Typography>
-          <Grid item xs={4}>
+          <Typography>Slow</Typography>
+          <Grid item xs={10}>
             <PrettoSlider
               defaultValue={500}
               value={this.state.speed}
@@ -156,7 +179,7 @@ class SortingVisualizer extends React.Component {
               valueLabelDisplay='auto'
             />
           </Grid>
-          <Typography>Slow</Typography>
+          <Typography>Fast</Typography>
         </Grid>
       </div>
     );
