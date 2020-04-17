@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useToasts } from "react-toast-notifications";
 import { withRouter } from "react-router";
 import { db, firebase } from "../config/firebase.js";
 import {
@@ -13,10 +14,12 @@ const SignUp = ({ history }) => {
   const [email, setEmail] = useState("");
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const {addToast} = useToasts()
 
-  const handleSignUp = e => {
+  const handleSignUp =  e => {
     // additional user fields can be initiated here
     e.preventDefault();
+
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -40,9 +43,12 @@ const SignUp = ({ history }) => {
           });
       })
       .catch(function(error) {
-        alert(error);
+        addToast(error.message, {
+          appearance: "warning",
+          autoDismiss: true
+        })
       });
-  };
+    }
 
   return (
     <Grid container direction="row" style={{ marginTop: "5em" }}>
