@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 #### algos is developed as an organizational tool to monitor and aid in algorithm problems and practice. Algorithms are dynamically assigned to pairs to practice whiteboarding. Additional resources, data structures, and links are also listed on the site.   
 ##### Deployed on: https://algorithms-2001-fsa-ny.web.app/
-##### Built by Alexander Wang.Influenced by https://my-mui.com/
+##### Built by Alexander Wang. Influenced by https://my-mui.com/
 
 ## Tech Stack
 - [React](https://facebook.github.io/react/)
