@@ -1,6 +1,12 @@
 import React from 'react';
-import { Paper, Grid, Typography, List, ListItemText } from '@material-ui/core';
+import { Paper, Grid, Typography, List, ListItemText, ListItem, ListItemIcon, Link } from '@material-ui/core';
+import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
 import categories from '../categories.png';
+
+let links = [
+  'https://leetcode.com/',
+  'https://www.educative.io/','https://www.algoexpert.io/product','https://www.interviewcake.com/table-of-contents','https://www.educative.io/courses/grokking-the-object-oriented-design-interview','https://leetcode.com/tag/stack/','https://www.interviewcake.com/article/python/data-structures-coding-interview','https://www.interviewcake.com/concept/java/hash-map','https://docs.google.com/spreadsheets/d/1Y98QKaYPazWImEt1nA_ocpGNJ-yQjH1FAsVQhUQ7OTw/edit#gid=0','https://visualgo.net/en','https://algoviz.io/','https://clementmihailescu.github.io/Sorting-Visualizer/',"hackerrank.com",'codewars.com'
+];
 
 export default function UserPage() {
   return (
@@ -92,7 +98,7 @@ export default function UserPage() {
           Additional Algorithms Links<Typography> </Typography>
         </Typography>
 
-        {/* <List dense={dense}>
+        <List >
           {links.map((link, i) => {
             return (
               <ListItem key={i}>
@@ -100,12 +106,12 @@ export default function UserPage() {
                   <DoubleArrowIcon />
                 </ListItemIcon>
                 <ListItemText>
-                  <Link href={`${link}`}>{`${link}`}</Link>
+                  <Link target="_blank" href={`${link}`}>{`${link}`}</Link>
                 </ListItemText>
               </ListItem>
             );
           })}
-        </List> */}
+        </List>
       </Grid>
     </Grid>
   );

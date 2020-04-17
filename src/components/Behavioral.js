@@ -172,7 +172,7 @@ export default function Behavioral() {
                   <DoubleArrowIcon />
                 </ListItemIcon>
                 <ListItemText>
-                  <Link href={`${link}`}>{`${link}`}</Link>
+                  <Link target="_blank" href={`${link}`}>{`${link}`}</Link>
                 </ListItemText>
               </ListItem>
             );
