@@ -59,7 +59,8 @@ const App = () => {
             <Route exact path="/behavioral" component={Behavioral} />
             {/* <Route exact path="/pairgenerator" component={PairGenerator} /> */}
             <Route exact path="/pairgenerator" component={() => <PairGenerator user={user} />} />
-            <Route exact path="/archive" component={ArchiveTable} />
+            {/* <Route exact path="/archive" component={ArchiveTable} /> */}
+            <Route exact path="/archive" component={() => <ArchiveTable user={user} />} />
             {/* <Route exact path="/archivetable" component={ArchiveTable} /> */}
             <Route exact path="/" component={() => <Home user={user} />} />
             <Route

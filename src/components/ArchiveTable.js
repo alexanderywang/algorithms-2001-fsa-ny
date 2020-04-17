@@ -128,7 +128,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function ArchiveTable() {
+export default function ArchiveTable({user}) {
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("");
@@ -370,7 +370,7 @@ export default function ArchiveTable() {
                         </Tooltip>
                       </TableCell>
                       {/* Admin Only */}
-                      {/* <TableCell>
+                      {user.email === "alex@wang.com" && (<TableCell>
                       <Tooltip title="Delete Theme">
                         <IconButton
                           aria-label="delete"
@@ -379,7 +379,7 @@ export default function ArchiveTable() {
                           <DeleteIcon />
                         </IconButton>
                       </Tooltip>
-                      </TableCell> */}
+                      </TableCell>)}
                     </TableRow>
                   );
                 })}
