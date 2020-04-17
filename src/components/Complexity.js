@@ -10,7 +10,7 @@ export default function Complexities() {
       <Grid>
         <Typography>
           Taken from{" "}
-          <Link href="https://www.bigocheatsheet.com/">
+          <Link target="_blank" href="https://www.bigocheatsheet.com/">
             https://www.bigocheatsheet.com/
           </Link>
         </Typography>

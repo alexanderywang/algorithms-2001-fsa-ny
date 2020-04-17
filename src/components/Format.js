@@ -47,21 +47,8 @@ export default function UserPage() {
             <ListItemText /> Also for medium+ difficulty, we can involve some
             pairs programming as we get better at the topics.
           </List>
-        </Paper>{' '}
-      </Grid>
-
-      <Grid
-        container
-        direction='row'
-        justify='flex-start'
-        alignItems='center'
-        item
-        xs={3}
-      >
-        <Paper>
-          <Typography>
-            <b>Systems Design: </b>
-          </Typography>
+          <List>
+            <ListItemText />   <b>Systems Design: </b>
           <List>
             <ListItemText /> Interviewers should design their own & meet up the
             prior to cover anything missed
@@ -74,19 +61,11 @@ export default function UserPage() {
             <ListItemText /> Ideally time leftover to cover the actual coding
             process
           </List>
-        </Paper>
-      </Grid>
-      <Grid
-        container
-        direction='row'
-        justify='flex-start'
-        alignItems='center'
-        item
-        xs={3}
-      >
-        <Paper>
-          <Typography>Mock Behavioral Questions on Friday</Typography>
-        </Paper>
+          </List>
+          <List>
+            <ListItemText /> Mock Behavioral Questions on Friday
+          </List>
+        </Paper>{' '}
       </Grid>
       <Grid
         container
@@ -100,6 +79,33 @@ export default function UserPage() {
           <Typography>educative.io Categories</Typography>
           <img alt='categories' src={categories} style={{ width: '100%' }} />
         </Paper>
+      </Grid>
+      <Grid
+        item
+        md={6}
+        spacing={2}
+        container
+        justify='center'
+        alignItems='flex-start'
+      >
+        <Typography variant='h6' >
+          Additional Algorithms Links<Typography> </Typography>
+        </Typography>
+
+        {/* <List dense={dense}>
+          {links.map((link, i) => {
+            return (
+              <ListItem key={i}>
+                <ListItemIcon>
+                  <DoubleArrowIcon />
+                </ListItemIcon>
+                <ListItemText>
+                  <Link href={`${link}`}>{`${link}`}</Link>
+                </ListItemText>
+              </ListItem>
+            );
+          })}
+        </List> */}
       </Grid>
     </Grid>
   );
