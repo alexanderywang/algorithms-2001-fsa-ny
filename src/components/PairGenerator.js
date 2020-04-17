@@ -211,7 +211,7 @@ console.log(user)
           </Link>
         </Grid>
         {/* Admin ONLY */}
-        <Grid>
+        {user.email === "alex@wang.com" && (<Grid>
           <Button
             variant="contained"
             color="inherit"
@@ -253,7 +253,7 @@ console.log(user)
           >
             5. Reset all choices AFTER assigning pairs for the day
           </Button>
-        </Grid>
+        </Grid>)}
         <Divider />
       </Grid>
     </Grid>
