@@ -39,6 +39,7 @@ const App = () => {
     });
   }, []);
   const themeState = useTheme();
+  console.log("App -> user", user)
   return (
     <Wrapper>
       <Grid style={{ paddingTop: 64 }}>
@@ -57,6 +58,7 @@ const App = () => {
             <Route exact path="/complexity" component={Complexity} />
             <Route exact path="/behavioral" component={Behavioral} />
             <Route exact path="/pairgenerator" component={PairGenerator} />
+            {/* <Route exact path="/pairgenerator" component={() => <PairGenerator user={user} />} /> */}
             <Route exact path="/archive" component={ArchiveTable} />
             {/* <Route exact path="/archivetable" component={ArchiveTable} /> */}
             <Route exact path="/" component={() => <Home user={user} />} />

@@ -3,9 +3,9 @@ import { Grid, Typography, Divider, Button, Link } from "@material-ui/core";
 import PeopleIcon from "@material-ui/icons/People";
 import reacto from "../reacto.png";
 import { db, firebase } from "../config/firebase";
-import { ConsoleWriter } from "istanbul-lib-report";
 
-function PairGenerator() {
+
+function PairGenerator({user}) {
   const [pairs, setPairs] = useState([]);
   const [grads, setGrads] = useState([]);
   const [time, setTime] = useState("");
@@ -154,7 +154,7 @@ function PairGenerator() {
     });
     console.log("updated");
   };
-
+console.log(user)
   if (!pairs) return <Grid>No pairs yet</Grid>;
 
   return (
@@ -165,7 +165,7 @@ function PairGenerator() {
       justify="center"
       alignItems="flex-start"
     >
-      <Grid xs={6}>
+      <Grid item xs={6}>
         <Typography
           style={{
             color: "#000",
@@ -177,15 +177,15 @@ function PairGenerator() {
           REACTO Algorithm Pairs
         </Typography>
 
-        <Typography variant="h5" fontFamily="Roboto" lineHeight="4">
+        <Typography variant="h5" fontFamily="Roboto" lineheight="4">
           {time} REACTO LEAD INSTRUCTOR: 👨‍🏫 {instructor} 👩‍🏫
         </Typography>
 
         <Button
           variant="contained"
-          color="#474747"
+          color="inherit"
           onClick={randomize}
-          disableRipple="true"
+          disableRipple={true}
         >
           Make random pairs
         </Button>
@@ -202,11 +202,11 @@ function PairGenerator() {
         ))}
       </Grid>
 
-      <Grid xs={6} container direction="row">
+      <Grid item xs={6} container direction="row">
         <Grid>
           <img alt="reacto" src={reacto} style={{ width: "100%" }} />
 
-          <Link href="https://www.fullstackacademy.com/blog/whiteboard-coding-interviews-a-6-step-process-to-solve-any-problem">
+          <Link target="_blank" href="https://www.fullstackacademy.com/blog/whiteboard-coding-interviews-a-6-step-process-to-solve-any-problem">
             Fullstack REACTO
           </Link>
         </Grid>
@@ -214,45 +214,45 @@ function PairGenerator() {
         <Grid>
           <Button
             variant="contained"
-            color="#474747"
+            color="inherit"
             onClick={getAMPairs}
-            disableRipple="true"
+            disableRipple={true}
           >
             1. Get AM Participants
           </Button>
-          {/* <Button
-            variant="contained"
-            color="#474747"
-            onClick={() => updateStats(instructor)}
-            disableRipple="true"
-          >
-            2. update everyone's interview stats
-          </Button> */}
           <Button
             variant="contained"
-            color="#2b2d2f"
+            color="inherit"
+            onClick={() => updateStats(instructor)}
+            disableRipple={true}
+          >
+            2. update everyone's interview stats
+          </Button>
+          <Button
+            variant="contained"
+            color="inherit"
             onClick={getPMPairs}
-            disableRipple="true"
+            disableRipple={true}
           >
             3. Get PM Participants
           </Button>
-          {/* <Button
+          <Button
             variant="contained"
-            color="#474747"
+            color="inherit"
             onClick={updateStats}
-            disableRipple="true"
+            disableRipple={true}
           >
             4. update everyone's interview stats
-          </Button> */}
+          </Button>
           <Divider />
-          {/* <Button
+          <Button
             variant="contained"
-            color="#474747"
+            color="inherit"
             onClick={resetChoices}
-            disableRipple="true"
+            disableRipple={true}
           >
             5. Reset all choices AFTER assigning pairs for the day
-          </Button> */}
+          </Button>
         </Grid>
         <Divider />
       </Grid>

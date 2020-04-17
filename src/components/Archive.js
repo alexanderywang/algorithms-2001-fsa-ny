@@ -139,9 +139,9 @@ export default function Archive() {
         <Grid>
           <Button
             variant="contained"
-            color="#474747"
+            color="inherit"
             onClick={() => randomQ(archives)}
-            disableRipple="true"
+            disableRipple={true}
           >
             ? Random Question ?
           </Button>

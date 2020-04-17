@@ -365,7 +365,7 @@ export default function ArchiveTable() {
                             href={`${row.solution}`}
                             target="_blank"
                           >
-                            <LibraryAddCheckIcon color="#474747" />
+                            <LibraryAddCheckIcon color="inherit" />
                           </IconButton>
                         </Tooltip>
                       </TableCell>
@@ -408,9 +408,9 @@ export default function ArchiveTable() {
       <Grid>
         <Button
           variant="contained"
-          color="#474747"
+          color="inherit"
           onClick={() => randomQ(archives)}
-          disableRipple="true"
+          disableRipple={true}
         >
           ? Random Question ?
         </Button>

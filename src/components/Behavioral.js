@@ -142,9 +142,9 @@ export default function Behavioral() {
         </List>
         <Button
           variant='contained'
-          color='#474747'
+          color='inherit'
           onClick={() => randomQ(questions, 'b')}
-          disableRipple='true'
+          disableRipple={true}
         >
           ? Random Question ?
         </Button>
@@ -206,9 +206,9 @@ export default function Behavioral() {
         </List>
         <Button
           variant='contained'
-          color='#474747'
+          color='inherit'
           onClick={() => randomQ(launchDayNonTechnical, 'nt')}
-          disableRipple='true'
+          disableRipple={true}
         >
           ? Random Non-technical Question ?
         </Button>
@@ -242,9 +242,9 @@ export default function Behavioral() {
         </List>
         <Button
           variant='contained'
-          color='#474747'
+          color='inherit'
           onClick={() => randomQ(launchDayTechnical, 't')}
-          disableRipple='true'
+          disableRipple={true}
         >
           ? Random Technical Question ?
         </Button>
@@ -278,9 +278,9 @@ export default function Behavioral() {
         </List>
         <Button
           variant='contained'
-          color='#474747'
+          color='inherit'
           onClick={() => randomQ(launchDayProjects, 'p')}
-          disableRipple='true'
+          disableRipple={true}
         >
           ? Random Project Question ?
         </Button>
