@@ -35,11 +35,9 @@ const PrettoSlider = withStyles({
   },
 })(Slider);
 
-var cancelId; // a no-op to start with
-
 const sleep = (milliseconds) => {
-  return new Promise((resolve) => {
-    cancelId = setTimeout(resolve, milliseconds);
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve, milliseconds);
   });
 };
 
@@ -79,7 +77,7 @@ class SortingVisualizer extends React.Component {
   genernrateRandomArray() {
     let array = [];
     let size = Math.floor(Math.random() * 101) + 4;
-    console.log(size);
+
     for (let i = 0; i < size; ++i) {
       let randomNum = Math.floor(Math.random() * 1000) + 10;
       array[i] = {
@@ -105,11 +103,8 @@ class SortingVisualizer extends React.Component {
         }
         this.setState({ data: Array.from(array) });
 
-        // await sleep(this.state.pause ? 5000 : 1000 - this.state.speed);
+        await sleep(1000 - this.state.speed);
 
-        if (!this.state.pause) {
-          clearTimeout(cancelId);
-        }
         array[j + 1].compare = false;
       }
       array[i].compare = false;
@@ -122,16 +117,8 @@ class SortingVisualizer extends React.Component {
       data: Array.from(array),
     });
   }
-  pause() {
-    this.setState({
-      pause: !this.state.pause,
-    });
-    console.log(this.state.pause);
-  }
+
   changedata(e) {
-    e.preventDefault();
-    // let array = this.state.data;
-    // BubbleSort(array, this.dataChanged, this.state.speed);
     this.bubbleSort(this.state.data);
   }
   render() {
@@ -156,11 +143,7 @@ class SortingVisualizer extends React.Component {
           <Grid item xs={4}>
             <Button onClick={(e) => this.changedata(e)}>Start</Button>
           </Grid>
-          <Grid item xs={4}>
-            <Button onClick={() => this.pause()}>
-              {this.state.pause ? 'Resume' : 'Pause'}
-            </Button>
-          </Grid>
+
           <Grid item xs={4}>
             <Button onClick={() => this.genernrateRandomArray()}>
               Random Array
