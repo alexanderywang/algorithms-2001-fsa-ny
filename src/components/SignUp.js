@@ -83,6 +83,39 @@ const SignUp = ({ history }) => {
     }
   }
 
+  // const handleGoogleSignUp =  async e => {
+  //   // additional user fields can be initiated here
+
+  //     firebase
+  //       .auth()
+  //       .createUserWithEmailAndPassword(email, password)
+  //       .then(cred => {
+  //         console.log("SignUp -> cred", cred);
+  //         return db
+  //           .collection("Users")
+  //           .doc(cred.user.uid)
+  //           .set({
+  //             email,
+  //             userName,
+  //             password,
+  //             instructor: 0,
+  //             interviewer: 0,
+  //             interviewee: 0,
+  //             AMReacto: false,
+  //             PMReacto: false
+  //           })
+  //           .then(() => {
+  //             history.push("/");
+  //           });
+  //       })
+  //       .catch(function(error) {
+  //         addToast(error.message, {
+  //           appearance: "warning",
+  //           autoDismiss: true
+  //         })
+  //       });
+  //     }
+
   return (
     <Grid container direction="row" style={{ marginTop: "5em" }}>
       <Grid
@@ -103,7 +136,7 @@ const SignUp = ({ history }) => {
             <Typography variant="h2">Sign Up</Typography>
           </Grid>
         </Grid>
-        <form>
+        <form onSubmit={handleSignUp}>
           <Grid
             item
             container
@@ -160,7 +193,8 @@ const SignUp = ({ history }) => {
                 onChange={e => setPassword(e.target.value)}
               />
             </DialogContent>
-            <Button onClick={handleSignUp}>Sign Up</Button>
+            <Button type="submit">Sign Up</Button>
+            {/* <Button onClick={handleGoogleSignUp}>Sign Up with Google</Button> */}
           </Grid>
         </form>
       </Grid>
