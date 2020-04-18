@@ -1,4 +1,5 @@
 import React, { useCallback, useContext, useState } from "react";
+import { useToasts } from "react-toast-notifications";
 import { withRouter, Redirect } from "react-router";
 import { firebase } from "../config/firebase.js";
 import { AuthContext } from "./Auth.js";
@@ -13,6 +14,7 @@ import {
 const Login = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const {addToast} = useToasts()
 
   const handleLogin = useCallback(
     async event => {
@@ -24,7 +26,10 @@ const Login = ({ history }) => {
           .signInWithEmailAndPassword(email.value, password.value);
         history.push("/");
       } catch (error) {
-        alert(error);
+        addToast(error.message, {
+          appearance: "warning",
+          autoDismiss: true
+        })
       }
     },
     [history]
