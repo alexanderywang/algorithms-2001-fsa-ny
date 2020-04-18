@@ -5,7 +5,7 @@ import categories from '../categories.png';
 
 let links = [
   'https://leetcode.com/',
-  'https://www.educative.io/','https://www.algoexpert.io/product','https://www.interviewcake.com/table-of-contents','https://www.educative.io/courses/grokking-the-object-oriented-design-interview','https://leetcode.com/tag/stack/','https://www.interviewcake.com/article/python/data-structures-coding-interview','https://www.interviewcake.com/concept/java/hash-map','https://docs.google.com/spreadsheets/d/1Y98QKaYPazWImEt1nA_ocpGNJ-yQjH1FAsVQhUQ7OTw/edit#gid=0','https://visualgo.net/en','https://algoviz.io/','https://clementmihailescu.github.io/Sorting-Visualizer/',"hackerrank.com",'codewars.com'
+  'https://www.educative.io/','https://www.algoexpert.io/product','https://www.interviewcake.com/table-of-contents','https://www.educative.io/courses/grokking-the-object-oriented-design-interview','https://leetcode.com/tag/stack/','https://www.interviewcake.com/article/python/data-structures-coding-interview','https://www.interviewcake.com/concept/java/hash-map','https://docs.google.com/spreadsheets/d/1Y98QKaYPazWImEt1nA_ocpGNJ-yQjH1FAsVQhUQ7OTw/edit#gid=0','https://visualgo.net/en','https://algoviz.io/','https://clementmihailescu.github.io/Sorting-Visualizer/',"https://hackerrank.com",'https://codewars.com', "https://projecteuler.net/archives"
 ];
 
 export default function UserPage() {
