@@ -4,7 +4,9 @@ import Button from '@material-ui/core/Button';
 import { Slider, Grid, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import layoutStypes from './sorting.module.scss';
-
+import BubbleSort from './BubbleSort';
+import { connect } from 'react-redux';
+import { getData } from '../store/sorting-data';
 const PrettoSlider = withStyles({
   root: {
     color: '#52af77',
@@ -41,7 +43,7 @@ const sleep = (milliseconds) => {
   });
 };
 
-class SortingVisualizer extends React.Component {
+class disSortingVisualizer extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -71,23 +73,27 @@ class SortingVisualizer extends React.Component {
     this.bubbleSort = this.bubbleSort.bind(this);
     this.genernrateRandomArray = this.genernrateRandomArray.bind(this);
   }
+
   changeSpeed(e, value) {
     this.setState({ speed: value });
   }
   genernrateRandomArray() {
-    let array = [];
-    let size = Math.floor(Math.random() * 101) + 4;
+    // let array = [];
+    // let size = Math.floor(Math.random() * 101) + 4;
 
-    for (let i = 0; i < size; ++i) {
-      let randomNum = Math.floor(Math.random() * 1000) + 10;
-      array[i] = {
-        name: '' + randomNum,
-        value: randomNum,
-      };
-    }
+    // for (let i = 0; i < size; ++i) {
+    //   let randomNum = Math.floor(Math.random() * 1000) + 10;
+    //   array[i] = {
+    //     name: '' + randomNum,
+    //     value: randomNum,
+    //   };
+    // }
+    this.props.genernrateData();
+    console.log('from store', this.props.data);
     this.setState({
-      data: array,
+      data: [...this.props.data],
     });
+    console.log(this.state.data);
   }
   async bubbleSort(array) {
     for (let i = 0; i < array.length; ++i) {
@@ -126,19 +132,22 @@ class SortingVisualizer extends React.Component {
     return (
       <div className={layoutStypes.container}>
         <h1>Bubble Sort</h1>
-        <BarChart width={730} height={250} data={this.state.data}>
-          <XAxis dataKey='name' />
+        {this.props.data ? (
+          <BarChart width={730} height={250} data={this.state.data}>
+            <XAxis dataKey='name' />
 
-          <Bar dataKey='value'>
-            {this.state.data.map((entry, index) => {
-              const color = entry.compare ? colors[0] : colors[1];
-              return (
-                <Cell key={index} fill={entry.done ? entry.done : color} />
-              );
-            })}
-          </Bar>
-        </BarChart>
+            <Bar dataKey='value'>
+              {this.state.data.map((entry, index) => {
+                const color = entry.compare ? colors[0] : colors[1];
+                return (
+                  <Cell key={index} fill={entry.done ? entry.done : color} />
+                );
+              })}
+            </Bar>
+          </BarChart>
+        ) : null}
 
+        {/* <BubbleSort data={this.state.data} dataChanged={this.dataChanged} /> */}
         <Grid container spacing={3}>
           <Grid item xs={4}>
             <Button onClick={(e) => this.changedata(e)}>Start</Button>
@@ -168,5 +177,16 @@ class SortingVisualizer extends React.Component {
     );
   }
 }
-
-export default SortingVisualizer;
+const mapState = (state) => {
+  return {
+    data: state.data,
+  };
+};
+const mapDispatch = (dispatch) => {
+  return {
+    genernrateData() {
+      dispatch(getData());
+    },
+  };
+};
+export default connect(mapState, mapDispatch)(disSortingVisualizer);
