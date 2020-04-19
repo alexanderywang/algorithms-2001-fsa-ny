@@ -11,6 +11,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "commitizen": "^4.0.4",
     "emotion-theming": "^10.0.27",
     "firebase": "^7.14.0",
     "node-sass": "^4.13.1",
