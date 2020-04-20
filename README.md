@@ -38,7 +38,7 @@ Thanks for your contributions to this project
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://www.chaohuichen.com/"><img src="https://avatars.githubusercontent.com/u/1500684?v=3" width="100px;" alt=""/><br /><sub><b>Peter Chen</b></sub></a><br /> <a href="https://github.com/all-contributors/all-contributors/commits?author=chaohuichen" title="Documentation">📖</a> </td>
+    <td align="center"><a href="https://www.chaohuichen.com/"><b>Peter Chen</b></a><br /> <a href="https://github.com/alexanderywang/algorithms-2001-fsa-ny/commits?author=chaohuichen" title="Documentation">📖</a> </td>
     <td align="center"><a href="https://github.com/jfmengels"><img src="https://avatars.githubusercontent.com/u/3869412?v=3" width="100px;" alt=""/><br /><sub><b>Jeroen Engels</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors/commits?author=jfmengels" title="Documentation">📖</a> <a href="https://github.com/all-contributors/all-contributors/pulls?q=is%3Apr+reviewed-by%3Ajfmengels" title="Reviewed Pull Requests">👀</a> <a href="#tool-jfmengels" title="Tools">🔧</a></td>
    
   </tr>
