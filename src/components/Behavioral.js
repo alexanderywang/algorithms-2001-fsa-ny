@@ -80,7 +80,7 @@ let questions = [
 
 let links = [
   'https://www.themuse.com/advice/30-behavioral-interview-questions-you-should-be-ready-to-answer',
-  'https://docs.google.com/document/d/1sUc4jn3JgenOAg49OG7adQxGet0nzz-wWhTJqNT1628/edit','https://www.lever.co/blog/mock-interview-questions/', 'https://www.interviewcake.com/interview-process-at-tech-companies'
+  'https://docs.google.com/document/d/1sUc4jn3JgenOAg49OG7adQxGet0nzz-wWhTJqNT1628/edit','https://www.lever.co/blog/mock-interview-questions/', 'https://www.interviewcake.com/interview-process-at-tech-companies', 'https://medium.com/cracking-the-data-science-interview/greedy-algorithm-and-dynamic-programming-a8c019928405','https://www.cprime.com/resources/what-is-agile-what-is-scrum/','https://javarevisited.blogspot.com/2015/02/50-programmer-phone-interview-questions-answers.html','https://enterprisersproject.com/article/2019/11/developer-job-interview-questions'
 ];
 
 const useStyles = makeStyles((theme) => ({
