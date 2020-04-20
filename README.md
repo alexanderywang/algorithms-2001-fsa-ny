@@ -5,7 +5,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 #### algos is developed as an organizational tool to monitor and aid in algorithm problems and practice. Algorithms are dynamically assigned to pairs to practice whiteboarding. Additional resources, data structures, and links are also listed on the site.   
 ##### Deployed on: https://algorithms-2001-fsa-ny.web.app/
 ##### Built by Alexander Wang. Influenced by https://my-mui.com/
-###### Contributions from chaohuichen on Sorting and stanislavlevitt on Login
 
 ## Tech Stack
 - [React](https://facebook.github.io/react/)
@@ -29,3 +28,19 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Archive for types of problems covered
 - Bonus feature: darkmode
 
+## Contributors ✨
+
+Thanks for your contributions to this project
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a target="_blank" href="https://github.com/chaohuichen"><img src="https://avatars0.githubusercontent.com/u/46075456?s=400&u=d296ae86beb047f31abac7f89507d88ec44fb1c6&v=4" width="100px;" alt=""/><br /><sub><b>Peter Chen</b></a><br /> <a href="https://github.com/alexanderywang/algorithms-2001-fsa-ny/commits?author=chaohuichen" title="Documentation">📖</a> </td>
+     <td align="center"><a target="_blank" href="https://github.com/stanislavlevitt"><img src="https://avatars0.githubusercontent.com/u/58434326?s=400&u=5d2069565f3bd83f7dfb8e9010a2477078418daf&v=4" width="100px;" alt=""/><br /><sub><b>Stanislav Levitt
+</b></a><br /> <a href="https://github.com/alexanderywang/algorithms-2001-fsa-ny/commits?author=stanislavlevitt" title="Documentation">📖</a> </td>
+</td>
+
+  </tr>
+</table>
