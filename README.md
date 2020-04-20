@@ -37,10 +37,10 @@ Thanks for your contributions to this project
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a target="_blank" href="https://www.chaohuichen.com/"><b>Peter Chen</b></a><br /> <a href="https://github.com/alexanderywang/algorithms-2001-fsa-ny/commits?author=chaohuichen" title="Documentation">📖</a> </td>
+    <td align="center"><a target="_blank" href="https://github.com/chaohuichen"><img src="https://avatars0.githubusercontent.com/u/46075456?s=400&u=d296ae86beb047f31abac7f89507d88ec44fb1c6&v=4" width="100px;" alt=""/><br /><sub><b>Peter Chen</b></a><br /> <a href="https://github.com/alexanderywang/algorithms-2001-fsa-ny/commits?author=chaohuichen" title="Documentation">📖</a> </td>
      <td align="center"><a target="_blank" href="https://github.com/stanislavlevitt"><img src="https://avatars0.githubusercontent.com/u/58434326?s=400&u=5d2069565f3bd83f7dfb8e9010a2477078418daf&v=4" width="100px;" alt=""/><br /><sub><b>Stanislav Levitt
 </b></a><br /> <a href="https://github.com/alexanderywang/algorithms-2001-fsa-ny/commits?author=stanislavlevitt" title="Documentation">📖</a> </td>
 </td>
-    <td align="center"><a href="https://github.com/tphbrok"><img src="https://avatars0.githubusercontent.com/u/11331876?v=4" width="100px;" alt=""/><br /><sub><b>Thomas Brok</b></sub></a><br /><a href="#translation-tphbrok" title="Translation">🌍</a></td>
+
   </tr>
 </table>
