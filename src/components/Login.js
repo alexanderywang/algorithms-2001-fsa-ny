@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useState } from "react";
 import { useToasts } from "react-toast-notifications";
 import { withRouter, Redirect } from "react-router";
-import { firebase } from "../config/firebase.js";
+import { firebase,google,db } from "../config/firebase.js";
 import { AuthContext } from "./Auth.js";
 import {
   Grid,
@@ -34,6 +34,40 @@ const Login = ({ history }) => {
     },
     [history]
   );
+
+  const handleGoogleLogin =  async e => {
+    try {
+      const userCredential = await firebase.auth().signInWithPopup(google)
+
+      let newUser = userCredential.additionalUserInfo.isNewUser
+
+      if(newUser){
+        const userName = await firebase.auth().currentUser.displayName;
+
+        const email = await firebase.auth().currentUser.email;
+
+          db.collection("Users")
+          .doc(userCredential.user.uid)
+          .set({
+            email,
+            userName,
+            instructor: 0,
+            interviewer: 0,
+            interviewee: 0,
+            AMReacto: false,
+            PMReacto: false
+          })
+      }
+
+         history.push("/")
+        }
+         catch (error) {
+          addToast(error.message, {
+            appearance: "warning",
+            autoDismiss: true
+          })
+    }
+  }
 
   const { user } = useContext(AuthContext);
 
@@ -110,6 +144,7 @@ const Login = ({ history }) => {
           >
             LOG IN
           </Button>
+          <Button onClick={handleGoogleLogin}>Log in with Google</Button>
         </form>
       </Grid>
     </Grid>
