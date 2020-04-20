@@ -11,6 +11,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "commitizen": "^4.0.4",
     "emotion-theming": "^10.0.27",
     "firebase": "^7.14.0",
     "node-sass": "^4.13.1",
@@ -23,7 +24,8 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "react-toast-notifications": "^2.4.0"
   },
   "scripts": {
     "start": "react-scripts start",

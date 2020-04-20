@@ -125,9 +125,9 @@ export default function UserPage({ user }) {
                       edge='start'
                       checked={checked.indexOf(value) !== -1}
                       tabIndex={-1}
-                      disableRipple
+                      disableRipple={true}
                       style={{
-                        color: '#2b2d2f',
+                        color: '#inherit',
                       }}
                       inputProps={{ 'aria-labelledby': labelId }}
                     />

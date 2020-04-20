@@ -1,19 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { Provider } from 'react-redux';
 import App from './components/App';
 import { ThemeProvider } from './components/ThemeContext';
+import { ToastProvider } from 'react-toast-notifications';
 import * as serviceWorker from './serviceWorker';
-import store from './store';
+
 ReactDOM.render(
-  <Provider store={store}>
-    <ThemeProvider>
+  <ThemeProvider>
+    <ToastProvider>
       <React.StrictMode>
         <App />
       </React.StrictMode>
-    </ThemeProvider>
-  </Provider>,
+    </ToastProvider>
+  </ThemeProvider>,
   document.getElementById('root')
 );
 

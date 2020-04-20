@@ -147,6 +147,12 @@ export default function Header({ user }) {
               label='Log out'
               onClick={handleClick}
             />
+            <Tab
+              className={classes.tab}
+              component={Link}
+              to="/archive"
+              label="Archives"
+            />
           </Grid>
         </Toolbar>
       </AppBar>

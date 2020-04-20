@@ -1,33 +1,21 @@
 import React, { useState } from "react";
 import { Grid, Typography, Divider, Button, Link } from "@material-ui/core";
 import PeopleIcon from "@material-ui/icons/People";
+import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import reacto from "../reacto.png";
 import { db, firebase } from "../config/firebase";
-import { ConsoleWriter } from "istanbul-lib-report";
 
-function PairGenerator() {
-  // const grads = [
-  //   "Alex",
-  //   "Stas",
-  //   "🍔 Yan 👑",
-  //   "April",
-  //   "Max",
-  //   "mark",
-  //   "Mike D",
-  //   "Nelson",
-  //   "AAron",
-  //   "Carlos",
-  //   "Leslie",
-  //   "Peter"
-  // ];
+
+function PairGenerator({user}) {
   const [pairs, setPairs] = useState([]);
   const [grads, setGrads] = useState([]);
   const [time, setTime] = useState("");
   const [instructor, setInstructor] = useState("");
-  const interviewers = [];
-  const interviewees = [];
+  const [interviewers, setInterviewers] = useState([])
+  const [interviewees, setInterviewees] = useState([])
+
   const resetChoices = () => {
-    //update all users to reflect AMReacto, PMReacto: falseå
+    //update all users to reflect AMReacto, PMReacto: false
     db.collection("Users")
       .get()
       .then(function(querySnapshot) {
@@ -42,6 +30,7 @@ function PairGenerator() {
       });
     console.log("Reset");
   };
+
   const getAMPairs = async () => {
     const participants = [];
     await db
@@ -59,6 +48,7 @@ function PairGenerator() {
       });
     setTime("AM");
   };
+
   const getPMPairs = async () => {
     const participants = [];
     await db
@@ -76,6 +66,7 @@ function PairGenerator() {
       });
     setTime("PM");
   };
+
   const randomize = () => {
     let array = grads.slice();
     for (let i = 0; i < array.length; i++) {
@@ -93,63 +84,78 @@ function PairGenerator() {
     for (let i = 0; i < array.length; i += 2) {
       let pair = array.slice(i, i + 2);
       pairs.push(pair);
-      interviewers.push(pair[0]);
-      interviewees.push(pair[1]);
     }
+    pairs.forEach(pair => {
+      setInterviewers(prevPairs => [...prevPairs, pair[0]])
+      setInterviewees(prevPairs => [...prevPairs, pair[1]])
+    })
 
-    console.log("PairGenerator -> interviewers", interviewers);
-    console.log("PairGenerator -> interviewees", interviewees);
     setPairs(pairs);
-    setInstructor(interviewers[0]);
+    setInstructor(pairs[0][0]);
   };
-  console.log("PairGenerator -> grads", grads);
-  const updateStats = async () => {
+
+  const updateStats = async instructorName => {
     //update instructor count
     await db
       .collection("Users")
-      .where("userName", "==", "instructor")
+      .where("userName", "==", instructorName)
       .get()
-      .then(doc => {
-        console.log(doc.id);
-        db.collection("Users")
+      .then(snapshot => {
+        snapshot.forEach(async doc => {
+          await db
+          .collection("Users")
           .doc(doc.id)
           .update({
             instructor: firebase.firestore.FieldValue.increment(1)
           });
+        });
+      })
+      .catch(err => {
+        console.error(err);
       });
-    //update interviewer count
+    // //update interviewer count
     interviewers.forEach(async interviewer => {
       await db
         .collection("Users")
-        .where("userName", "==", "interviewer")
+        .where("userName", "==", interviewer)
         .get()
-        .then(doc => {
-          console.log(doc.id);
-          db.collection("Users")
+        .then(snapshot => {
+          snapshot.forEach(async doc => {
+            await db
+            .collection("Users")
             .doc(doc.id)
             .update({
               interviewer: firebase.firestore.FieldValue.increment(1)
             });
+          });
+        })
+        .catch(err => {
+          console.error(err);
         });
     });
-    //update interviewee count
+    // //update interviewee count
     interviewees.forEach(async interviewee => {
       await db
         .collection("Users")
-        .where("userName", "==", "interviewee")
+        .where("userName", "==", interviewee)
         .get()
-        .then(doc => {
-          console.log(doc.id);
-          db.collection("Users")
+        .then(snapshot => {
+          snapshot.forEach(async doc => {
+            await db
+            .collection("Users")
             .doc(doc.id)
             .update({
               interviewee: firebase.firestore.FieldValue.increment(1)
             });
+          });
+        })
+        .catch(err => {
+          console.error(err);
         });
     });
     console.log("updated");
   };
-
+console.log(user)
   if (!pairs) return <Grid>No pairs yet</Grid>;
 
   return (
@@ -160,7 +166,7 @@ function PairGenerator() {
       justify="center"
       alignItems="flex-start"
     >
-      <Grid xs={6}>
+      <Grid item xs={6}>
         <Typography
           style={{
             color: "#000",
@@ -172,17 +178,17 @@ function PairGenerator() {
           REACTO Algorithm Pairs
         </Typography>
 
-        <Typography variant="h5" fontFamily="Roboto" lineHeight="4">
+        <Typography variant="h5" fontFamily="Roboto" lineheight="4">
           {time} REACTO LEAD INSTRUCTOR: 👨‍🏫 {instructor} 👩‍🏫
         </Typography>
 
         <Button
           variant="contained"
-          color="#474747"
+          color="inherit"
           onClick={randomize}
-          disableRipple="true"
+          disableRipple={true}
         >
-          Make random pairs
+          <PeopleOutlineIcon/>Make random pairs
         </Button>
         {pairs.map((pair, i) => (
           <Grid key={i}>
@@ -197,58 +203,58 @@ function PairGenerator() {
         ))}
       </Grid>
 
-      <Grid xs={6} container direction="row">
+      <Grid item xs={6} container direction="row">
         <Grid>
           <img alt="reacto" src={reacto} style={{ width: "100%" }} />
 
-          <Link href="https://www.fullstackacademy.com/blog/whiteboard-coding-interviews-a-6-step-process-to-solve-any-problem">
+          <Link target="_blank" href="https://www.fullstackacademy.com/blog/whiteboard-coding-interviews-a-6-step-process-to-solve-any-problem">
             Fullstack REACTO
           </Link>
         </Grid>
         {/* Admin ONLY */}
-        <Grid>
+        {user.email === "alex@wang.com" && (<Grid>
           <Button
             variant="contained"
-            color="#474747"
+            color="inherit"
             onClick={getAMPairs}
-            disableRipple="true"
+            disableRipple={true}
           >
             1. Get AM Participants
           </Button>
-          {/* <Button
-            variant="contained"
-            color="#474747"
-            onClick={updateStats}
-            disableRipple="true"
-          >
-            2. update everyone's interview stats
-          </Button> */}
           <Button
             variant="contained"
-            color="#2b2d2f"
+            color="inherit"
+            onClick={() => updateStats(instructor)}
+            disableRipple={true}
+          >
+            2. update everyone's interview stats
+          </Button>
+          <Button
+            variant="contained"
+            color="inherit"
             onClick={getPMPairs}
-            disableRipple="true"
+            disableRipple={true}
           >
             3. Get PM Participants
           </Button>
-          {/* <Button
+          <Button
             variant="contained"
-            color="#474747"
+            color="inherit"
             onClick={updateStats}
-            disableRipple="true"
+            disableRipple={true}
           >
             4. update everyone's interview stats
-          </Button> */}
+          </Button>
           <Divider />
-          {/* <Button
+          <Button
             variant="contained"
-            color="#474747"
+            color="inherit"
             onClick={resetChoices}
-            disableRipple="true"
+            disableRipple={true}
           >
             5. Reset all choices AFTER assigning pairs for the day
-          </Button> */}
-        </Grid>
+          </Button>
+        </Grid>)}
         <Divider />
       </Grid>
     </Grid>
