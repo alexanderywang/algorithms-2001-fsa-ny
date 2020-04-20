@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Grid, Typography, Divider, Button, Link } from "@material-ui/core";
 import PeopleIcon from "@material-ui/icons/People";
+import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import reacto from "../reacto.png";
 import { db, firebase } from "../config/firebase";
 
@@ -187,7 +188,7 @@ console.log(user)
           onClick={randomize}
           disableRipple={true}
         >
-          Make random pairs
+          <PeopleOutlineIcon/>Make random pairs
         </Button>
         {pairs.map((pair, i) => (
           <Grid key={i}>

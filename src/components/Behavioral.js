@@ -79,8 +79,8 @@ let questions = [
 ];
 
 let links = [
-  'https://www.themuse.com/advice/30-behavioral-interview-questions-you-should-be-ready-to-answer',
-  'https://docs.google.com/document/d/1sUc4jn3JgenOAg49OG7adQxGet0nzz-wWhTJqNT1628/edit','https://www.lever.co/blog/mock-interview-questions/', 'https://www.interviewcake.com/interview-process-at-tech-companies', 'https://medium.com/cracking-the-data-science-interview/greedy-algorithm-and-dynamic-programming-a8c019928405','https://www.cprime.com/resources/what-is-agile-what-is-scrum/','https://javarevisited.blogspot.com/2015/02/50-programmer-phone-interview-questions-answers.html','https://enterprisersproject.com/article/2019/11/developer-job-interview-questions'
+  'https://www.themuse.com/advice/30-behavioral-interview-questions-you-should-be-ready-to-answer','https://docs.google.com/document/d/1oFdNIPcJkW13R3eR532MCToiS9-f9R2--eWu_qcC3LM/edit','https://docs.google.com/document/d/1jzPhFDTlzuujYuwhZpqcrPH_mXzAiqx9t6K3vLDl9e8/edit',
+  'https://docs.google.com/document/d/1sUc4jn3JgenOAg49OG7adQxGet0nzz-wWhTJqNT1628/edit','https://www.lever.co/blog/mock-interview-questions/', 'https://www.interviewcake.com/interview-process-at-tech-companies', 'https://medium.com/cracking-the-data-science-interview/greedy-algorithm-and-dynamic-programming-a8c019928405','https://www.cprime.com/resources/what-is-agile-what-is-scrum/','https://javarevisited.blogspot.com/2015/02/50-programmer-phone-interview-questions-answers.html','https://enterprisersproject.com/article/2019/11/developer-job-interview-questions','https://www.thebalancecareers.com/what-is-your-greatest-weakness-2061288','https://www.integrant.com/when-to-use-sql-vs-nosql/','https://bitnine.net/blog-computing/sql-vs-nosql-comparative-advantages-and-disadvantages/'
 ];
 
 const useStyles = makeStyles((theme) => ({
