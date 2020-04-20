@@ -73,23 +73,26 @@ class disSortingVisualizer extends React.Component {
     this.bubbleSort = this.bubbleSort.bind(this);
     this.genernrateRandomArray = this.genernrateRandomArray.bind(this);
   }
-
+  componentDidMount() {
+    this.props.genernrateData();
+    console.log('from store', this.props.data);
+  }
   changeSpeed(e, value) {
     this.setState({ speed: value });
   }
   genernrateRandomArray() {
-    // let array = [];
-    // let size = Math.floor(Math.random() * 101) + 4;
+    let array = [];
+    let size = Math.floor(Math.random() * 101) + 4;
 
-    // for (let i = 0; i < size; ++i) {
-    //   let randomNum = Math.floor(Math.random() * 1000) + 10;
-    //   array[i] = {
-    //     name: '' + randomNum,
-    //     value: randomNum,
-    //   };
-    // }
-    this.props.genernrateData();
-    console.log('from store', this.props.data);
+    for (let i = 0; i < size; ++i) {
+      let randomNum = Math.floor(Math.random() * 1000) + 10;
+      array[i] = {
+        name: '' + randomNum,
+        value: randomNum,
+      };
+    }
+    // this.props.genernrateData();
+
     this.setState({
       data: [...this.props.data],
     });
@@ -146,8 +149,7 @@ class disSortingVisualizer extends React.Component {
             </Bar>
           </BarChart>
         ) : null}
-
-        {/* <BubbleSort data={this.state.data} dataChanged={this.dataChanged} /> */}
+        <BubbleSort data={this.state.data} />
         <Grid container spacing={3}>
           <Grid item xs={4}>
             <Button onClick={(e) => this.changedata(e)}>Start</Button>

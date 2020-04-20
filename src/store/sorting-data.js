@@ -21,24 +21,7 @@ export const getData = () => {
     }
   };
 };
-const initstate = [
-  {
-    name: '500',
-    value: 500,
-  },
-  {
-    name: '300',
-    value: 300,
-  },
-  {
-    name: '50',
-    value: 50,
-  },
-  {
-    name: '1000',
-    value: 1000,
-  },
-];
+const initstate = [];
 const dataReducer = (state = initstate, action) => {
   switch (action.type) {
     case GET_DATA:
