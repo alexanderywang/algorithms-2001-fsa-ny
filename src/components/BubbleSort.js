@@ -1,29 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BarChart, CartesianGrid, Bar, XAxis, Cell } from 'recharts';
-import { connect } from 'react-redux';
 
 const sleep = (milliseconds) => {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 };
-const BubbleSort = (props) => {
-  // constructor({ data }) {
-  //   super();
-  //   this.state = {
-  //     data: data,
-  //   };
-  //   this.bubbleSort = this.bubbleSort.bind(this);
-  // }
-  // componentDidMount() {
-  //   this.setState({
-  //     data: this.props.data,
-  //   });
-  // }
+const BubbleSort = ({ data, sortStart }) => {
+  // let copy = JSON.parse(JSON.stringify(data));
+  console.log('sort start', sortStart);
+  const [bubbleData, setBubbleData] = useState([]);
+  // const [sortStart, setSortStart] = useState(sortStart);
 
-  // componentDidMount() {
-  //   this.setState({
-  //     data: this.props.data,
-  //   });
-  // }
+  useEffect(() => {
+    setBubbleData(data);
+  }, [data]);
+
+  // useEffect(() => {
+  //   if(sortStart){
+  //     bubbleSort(bubbleData)
+  //   }
+  // }, [sortStart]);
 
   const bubbleSort = async (array) => {
     for (let i = 0; i < array.length; ++i) {
@@ -37,26 +32,32 @@ const BubbleSort = (props) => {
           array[j + 1].value = temp;
           array[j + 1].name = '' + temp;
         }
-        this.setState({ data: Array.from(array) });
+        // setBubbleData([...array]);
 
-        await sleep(1000 - this.state.speed);
+        // await sleep(1000);
 
         array[j + 1].compare = false;
       }
       array[i].compare = false;
       array[i].done = '#00C49F';
     }
-    this.setState({ data: Array.from(array) });
+    // setBubbleData(Array.from(array));
   };
 
   const colors = ['#0088FE', '#FF0000', '#FFBB28', '#FF8042'];
-  console.log('this.props.data', this.props.data);
+
+  if (sortStart === true) {
+    sortStart = false;
+    bubbleSort([...bubbleData]);
+
+    console.log('in the if ', sortStart);
+  }
   return (
-    <BarChart width={730} height={250} data={this.state.data}>
+    <BarChart width={730} height={250} data={bubbleData}>
       <XAxis dataKey='name' />
 
       <Bar dataKey='value'>
-        {this.state.data.map((entry, index) => {
+        {bubbleData.map((entry, index) => {
           const color = entry.compare ? '#0088FE' : '#FF0000';
           return <Cell key={index} fill={entry.done ? entry.done : color} />;
         })}

@@ -67,16 +67,17 @@ class disSortingVisualizer extends React.Component {
       ],
       speed: 500,
       pause: false,
+      sortStart: false,
     };
     this.changedata = this.changedata.bind(this);
     this.dataChanged = this.dataChanged.bind(this);
     this.bubbleSort = this.bubbleSort.bind(this);
     this.genernrateRandomArray = this.genernrateRandomArray.bind(this);
   }
-  componentDidMount() {
-    this.props.genernrateData();
-    console.log('from store', this.props.data);
-  }
+  // componentDidMount() {
+  //   // this.props.genernrateData();
+  //   console.log('from store', this.props.data);
+  // }
   changeSpeed(e, value) {
     this.setState({ speed: value });
   }
@@ -94,9 +95,9 @@ class disSortingVisualizer extends React.Component {
     // this.props.genernrateData();
 
     this.setState({
-      data: [...this.props.data],
+      data: [...array],
     });
-    console.log(this.state.data);
+    console.log('in visualizaer', this.state.data);
   }
   async bubbleSort(array) {
     for (let i = 0; i < array.length; ++i) {
@@ -128,28 +129,31 @@ class disSortingVisualizer extends React.Component {
   }
 
   changedata(e) {
-    this.bubbleSort(this.state.data);
+    // this.bubbleSort(this.state.data);
+    this.setState({
+      sortStart: true,
+    });
   }
   render() {
     const colors = ['#0088FE', '#FF0000', '#FFBB28', '#FF8042'];
     return (
       <div className={layoutStypes.container}>
         <h1>Bubble Sort</h1>
-        {this.props.data ? (
-          <BarChart width={730} height={250} data={this.state.data}>
-            <XAxis dataKey='name' />
+        {/* 
+        <BarChart width={730} height={250} data={this.state.data}>
+          <XAxis dataKey='name' />
 
-            <Bar dataKey='value'>
-              {this.state.data.map((entry, index) => {
-                const color = entry.compare ? colors[0] : colors[1];
-                return (
-                  <Cell key={index} fill={entry.done ? entry.done : color} />
-                );
-              })}
-            </Bar>
-          </BarChart>
-        ) : null}
-        <BubbleSort data={this.state.data} />
+          <Bar dataKey='value'>
+            {this.state.data.map((entry, index) => {
+              const color = entry.compare ? colors[0] : colors[1];
+              return (
+                <Cell key={index} fill={entry.done ? entry.done : color} />
+              );
+            })}
+          </Bar>
+        </BarChart> */}
+
+        <BubbleSort data={this.state.data} sortStart={this.state.sortStart} />
         <Grid container spacing={3}>
           <Grid item xs={4}>
             <Button onClick={(e) => this.changedata(e)}>Start</Button>
