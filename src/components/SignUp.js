@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useToasts } from "react-toast-notifications";
 import { withRouter } from "react-router";
-import { db, firebase } from "../config/firebase.js";
+import { db, firebase,google} from "../config/firebase.js";
 import {
   Grid,
   Button,
@@ -17,15 +17,6 @@ const SignUp = ({ history }) => {
   const {addToast} = useToasts()
 
   const handleSignUp =  async e => {
-    // additional user fields can be initiated here
-    e.preventDefault();
-    if(!userName && email && password){
-      addToast("UserName can not be blank", {
-        appearance: "warning",
-        autoDismiss: true
-      })
-    }
-    else{
       e.preventDefault();
       firebase
         .auth()
@@ -80,6 +71,36 @@ const SignUp = ({ history }) => {
         //   autoDismiss: true
         // })
       // }
+
+  }
+
+  const handleGoogleSignUp =  async e => {
+    try {
+      const { user } = await firebase.auth().signInWithPopup(google);
+
+          const userName = await firebase.auth().currentUser.displayName;
+
+          const email = await firebase.auth().currentUser.email;
+
+            db.collection("Users")
+            .doc(user.uid)
+            .set({
+              email,
+              userName,
+              instructor: 0,
+              interviewer: 0,
+              interviewee: 0,
+              AMReacto: false,
+              PMReacto: false
+            })
+
+            history.push("/");
+        }
+         catch (error) {
+          addToast(error.message, {
+            appearance: "warning",
+            autoDismiss: true
+          })
     }
   }
 
@@ -103,7 +124,7 @@ const SignUp = ({ history }) => {
             <Typography variant="h2">Sign Up</Typography>
           </Grid>
         </Grid>
-        <form>
+        <form onSubmit={handleSignUp}>
           <Grid
             item
             container
@@ -160,7 +181,8 @@ const SignUp = ({ history }) => {
                 onChange={e => setPassword(e.target.value)}
               />
             </DialogContent>
-            <Button onClick={handleSignUp}>Sign Up</Button>
+            <Button type="submit">Sign Up</Button>
+            <Button onClick={handleGoogleSignUp}>Sign Up with Google</Button>
           </Grid>
         </form>
       </Grid>
