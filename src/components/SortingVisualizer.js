@@ -4,9 +4,11 @@ import Button from '@material-ui/core/Button';
 import { Slider, Grid, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import layoutStypes from './sorting.module.scss';
-import BubbleSort from './BubbleSort';
+// import BubbleSort from './BubbleSort';
 import { connect } from 'react-redux';
 import { getData } from '../store/sorting-data';
+import { BubbleSort } from './BubbleSortFun';
+import { InsertionSort } from './InsertionSortFun';
 const PrettoSlider = withStyles({
   root: {
     color: '#52af77',
@@ -43,7 +45,7 @@ const sleep = (milliseconds) => {
   });
 };
 
-class disSortingVisualizer extends React.Component {
+class SortingVisualizer extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -129,17 +131,18 @@ class disSortingVisualizer extends React.Component {
   }
 
   changedata(e) {
-    // this.bubbleSort(this.state.data);
-    this.setState({
-      sortStart: true,
-    });
+    // BubbleSort(this.state.data, this.dataChanged);
+    // this.setState({
+    //   sortStart: true,
+    // });
+    InsertionSort(this.state.data, this.dataChanged);
   }
   render() {
     const colors = ['#0088FE', '#FF0000', '#FFBB28', '#FF8042'];
     return (
       <div className={layoutStypes.container}>
         <h1>Bubble Sort</h1>
-        {/* 
+
         <BarChart width={730} height={250} data={this.state.data}>
           <XAxis dataKey='name' />
 
@@ -151,9 +154,12 @@ class disSortingVisualizer extends React.Component {
               );
             })}
           </Bar>
-        </BarChart> */}
-
-        <BubbleSort data={this.state.data} sortStart={this.state.sortStart} />
+        </BarChart>
+        {/* 
+        <BubbleSort
+          data={this.state.data}
+          sortStart={this.state.sortStart ? true : false}
+        /> */}
         <Grid container spacing={3}>
           <Grid item xs={4}>
             <Button onClick={(e) => this.changedata(e)}>Start</Button>
@@ -183,16 +189,5 @@ class disSortingVisualizer extends React.Component {
     );
   }
 }
-const mapState = (state) => {
-  return {
-    data: state.data,
-  };
-};
-const mapDispatch = (dispatch) => {
-  return {
-    genernrateData() {
-      dispatch(getData());
-    },
-  };
-};
-export default connect(mapState, mapDispatch)(disSortingVisualizer);
+
+export default SortingVisualizer;
