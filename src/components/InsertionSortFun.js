@@ -5,13 +5,12 @@ const sleep = (milliseconds) => {
 };
 
 export const InsertionSort = async (array, callback) => {
-  console.log('insertion sort');
   for (let i = 1; i < array.length; ++i) {
     let j = i;
 
     while (j > 0 && array[j].value < array[j - 1].value) {
       array[j].compare = true;
-      //   array[j - 1].compare = true;
+
       callback(array);
       let temp = array[j - 1].value;
       array[j - 1].value = array[j].value;
@@ -19,12 +18,15 @@ export const InsertionSort = async (array, callback) => {
       array[j].value = temp;
       array[j].name = '' + temp;
       array[j].compare = false;
-      //   array[j - 1].compare = false;
+
       await sleep(0);
 
       callback(array);
+
       j -= 1;
     }
+    array[i].done = '#00C49F';
+    callback(array);
   }
   console.log('insertion sort', array);
   callback(array);
