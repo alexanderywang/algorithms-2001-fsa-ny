@@ -6,9 +6,9 @@ const sleep = (milliseconds) => {
 
 export const BubbleSort = async (array, callback) => {
   for (let i = 0; i < array.length; ++i) {
-    array[i].compare = true;
+    array[i].color = '#0088FE';
     for (let j = i; j < array.length - 1; ++j) {
-      array[j + 1].compare = true;
+      array[j + 1].color = '#0088FE';
       if (array[i].value > array[j + 1].value) {
         let temp = array[i].value;
         array[i].value = array[j + 1].value;
@@ -20,9 +20,9 @@ export const BubbleSort = async (array, callback) => {
 
       await sleep(0);
 
-      array[j + 1].compare = false;
+      array[j + 1].color = '#FF0000';
     }
-    array[i].compare = false;
+    array[i].color = '#FF0000';
     array[i].done = '#00C49F';
   }
   callback(array);

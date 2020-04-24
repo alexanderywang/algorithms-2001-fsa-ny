@@ -1,7 +1,15 @@
 import React from 'react';
 import { BarChart, CartesianGrid, Bar, XAxis, Cell } from 'recharts';
 import Button from '@material-ui/core/Button';
-import { Slider, Grid, Typography } from '@material-ui/core';
+import {
+  Slider,
+  Grid,
+  Typography,
+  AppBar,
+  Tabs,
+  Tab,
+  Box,
+} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import layoutStypes from './sorting.module.scss';
 // import BubbleSort from './BubbleSort';
@@ -44,7 +52,28 @@ const sleep = (milliseconds) => {
     setTimeout(resolve, milliseconds);
   });
 };
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
+  return (
+    <Typography
+      component='div'
+      role='tabpanel'
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && <Box p={3}>{children}</Box>}
+    </Typography>
+  );
+}
 class SortingVisualizer extends React.Component {
   constructor() {
     super();
@@ -141,6 +170,22 @@ class SortingVisualizer extends React.Component {
     const colors = ['#0088FE', '#FF0000', '#FFBB28', '#FF8042'];
     return (
       <div className={layoutStypes.container}>
+        <AppBar position='static'>
+          <Tabs value={0} aria-label='simple tabs example'>
+            <Tab label='Item One' {...a11yProps(0)} />
+            <Tab label='Item Two' {...a11yProps(1)} />
+            <Tab label='Item Three' {...a11yProps(2)} />
+          </Tabs>
+        </AppBar>
+        <TabPanel value={0} index={0}>
+          Item One
+        </TabPanel>
+        <TabPanel value={0} index={1}>
+          Item Two
+        </TabPanel>
+        <TabPanel value={0} index={2}>
+          Item Three
+        </TabPanel>
         <h1>Bubble Sort</h1>
 
         <BarChart width={730} height={250} data={this.state.data}>
@@ -148,9 +193,17 @@ class SortingVisualizer extends React.Component {
 
           <Bar dataKey='value'>
             {this.state.data.map((entry, index) => {
-              const color = entry.compare ? colors[0] : colors[1];
               return (
-                <Cell key={index} fill={entry.done ? entry.done : color} />
+                <Cell
+                  key={index}
+                  fill={
+                    entry.done
+                      ? entry.done
+                      : entry.color
+                      ? entry.color
+                      : colors[1]
+                  }
+                />
               );
             })}
           </Bar>

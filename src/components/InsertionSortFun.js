@@ -9,7 +9,7 @@ export const InsertionSort = async (array, callback) => {
     let j = i;
 
     while (j > 0 && array[j].value < array[j - 1].value) {
-      array[j].compare = true;
+      array[j].color = '#9400D3';
 
       callback(array);
       let temp = array[j - 1].value;
@@ -20,12 +20,13 @@ export const InsertionSort = async (array, callback) => {
       array[j].compare = false;
 
       await sleep(0);
-
+      array[j].color = '#00C49F';
+      array[j - 1].color = '#00C49F';
       callback(array);
 
       j -= 1;
     }
-    array[i].done = '#00C49F';
+    // array[i].color = '#00C49F';
     callback(array);
   }
   console.log('insertion sort', array);
