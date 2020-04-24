@@ -415,7 +415,7 @@ export default function ArchiveTable({user}) {
           ? Random Question ?
         </Button>
         <Grid>
-          <Link href={`${random}`}>
+          <Link target="_blank" href={`${random}`}>
             <Typography>{random}</Typography>
           </Link>
         </Grid>
