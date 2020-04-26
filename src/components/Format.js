@@ -1,27 +1,59 @@
-import React from 'react';
-import { Paper, Grid, Typography, List, ListItemText, ListItem, ListItemIcon, Link } from '@material-ui/core';
-import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
-import categories from '../categories.png';
+import React from "react";
+import {
+  Paper,
+  Grid,
+  Typography,
+  List,
+  ListItemText,
+  ListItem,
+  ListItemIcon,
+  Link
+} from "@material-ui/core";
+import DoubleArrowIcon from "@material-ui/icons/DoubleArrow";
+import categories from "../categories.png";
 
 let links = [
-  'https://leetcode.com/',
-  'https://www.educative.io/','https://www.algoexpert.io/product','https://www.interviewcake.com/table-of-contents','https://www.educative.io/courses/grokking-the-object-oriented-design-interview','https://www.pramp.com/#/','https://leetcode.com/tag/stack/','https://www.interviewcake.com/article/python/data-structures-coding-interview','https://www.interviewcake.com/concept/java/hash-map','https://www.interviewcake.com/data-structures-and-algorithms-guide','https://docs.google.com/spreadsheets/d/1Y98QKaYPazWImEt1nA_ocpGNJ-yQjH1FAsVQhUQ7OTw/edit#gid=0','https://visualgo.net/en','https://algoviz.io/','https://clementmihailescu.github.io/Sorting-Visualizer/','http://btv.melezinek.cz/binary-search-tree.html',"https://hackerrank.com",'https://codewars.com', "https://projecteuler.net/archives", 'https://workshape.github.io/visual-graph-algorithms/', 'https://qiao.github.io/PathFinding.js/visual/', 'https://www.toptal.com/developers/sorting-algorithms', 'https://leetcode.com/articles/trapping-rain-water/', 'https://leetcode.com/discuss/interview-question/448285/List-of-questions-sorted-by-common-patterns','https://seanprashad.com/leetcode-patterns/'
+  "https://leetcode.com/",
+  "https://www.educative.io/",
+  "https://www.algoexpert.io/product",
+  "https://www.interviewcake.com/table-of-contents",
+  "https://www.educative.io/courses/grokking-the-object-oriented-design-interview",
+  "https://www.pramp.com/#/",
+  "https://leetcode.com/tag/stack/",
+  "https://www.interviewcake.com/article/python/data-structures-coding-interview",
+  "https://www.interviewcake.com/concept/java/hash-map",
+  "https://www.interviewcake.com/data-structures-and-algorithms-guide",
+  "https://docs.google.com/spreadsheets/d/1Y98QKaYPazWImEt1nA_ocpGNJ-yQjH1FAsVQhUQ7OTw/edit#gid=0",
+  "https://visualgo.net/en",
+  "https://algoviz.io/",
+  "https://clementmihailescu.github.io/Sorting-Visualizer/",
+  "http://btv.melezinek.cz/binary-search-tree.html",
+  "https://hackerrank.com",
+  "https://codewars.com",
+  "https://projecteuler.net/archives",
+  "https://workshape.github.io/visual-graph-algorithms/",
+  "https://qiao.github.io/PathFinding.js/visual/",
+  "https://www.toptal.com/developers/sorting-algorithms",
+  "https://leetcode.com/articles/trapping-rain-water/",
+  "https://leetcode.com/discuss/interview-question/448285/List-of-questions-sorted-by-common-patterns",
+  "https://seanprashad.com/leetcode-patterns/",
+  "https://hackernoon.com/14-patterns-to-ace-any-coding-interview-question-c5bb3357f6ed"
 ];
 
 export default function UserPage() {
   return (
-    <Grid container flexgrow='1' spacing={4}>
+    <Grid container flexgrow="1" spacing={4}>
       <Grid
         container
-        direction='row'
-        justify='flex-start'
-        alignItems='center'
+        direction="row"
+        justify="flex-start"
+        alignItems="center"
         item
         xs={3}
       >
         <Paper>
           <Typography>
-            <b>Algos Format:</b>{' '}
+            <b>Algos Format:</b>{" "}
           </Typography>
           <List>
             <ListItemText /> People sign up day before.
@@ -54,36 +86,36 @@ export default function UserPage() {
             pairs programming as we get better at the topics.
           </List>
           <List>
-            <ListItemText />   <b>Systems Design: </b>
-          <List>
-            <ListItemText /> Interviewers should design their own & meet up the
-            prior to cover anything missed
-          </List>
-          <List>
-            <ListItemText /> Interviewees time to come up with their own, and
-            then have everyone meet back and discuss.
-          </List>
-          <List>
-            <ListItemText /> Ideally time leftover to cover the actual coding
-            process
-          </List>
+            <ListItemText /> <b>Systems Design: </b>
+            <List>
+              <ListItemText /> Interviewers should design their own & meet up
+              the prior to cover anything missed
+            </List>
+            <List>
+              <ListItemText /> Interviewees time to come up with their own, and
+              then have everyone meet back and discuss.
+            </List>
+            <List>
+              <ListItemText /> Ideally time leftover to cover the actual coding
+              process
+            </List>
           </List>
           <List>
             <ListItemText /> Mock Behavioral Questions on Friday
           </List>
-        </Paper>{' '}
+        </Paper>{" "}
       </Grid>
       <Grid
         container
-        direction='row'
-        justify='flex-start'
-        alignItems='center'
+        direction="row"
+        justify="flex-start"
+        alignItems="center"
         item
         xs={3}
       >
         <Paper>
           <Typography>educative.io Categories</Typography>
-          <img alt='categories' src={categories} style={{ width: '100%' }} />
+          <img alt="categories" src={categories} style={{ width: "100%" }} />
         </Paper>
       </Grid>
       <Grid
@@ -91,14 +123,14 @@ export default function UserPage() {
         md={6}
         spacing={2}
         container
-        justify='center'
-        alignItems='flex-start'
+        justify="center"
+        alignItems="flex-start"
       >
-        <Typography variant='h6' >
+        <Typography variant="h6">
           Additional Algorithms Links<Typography> </Typography>
         </Typography>
 
-        <List >
+        <List>
           {links.map((link, i) => {
             return (
               <ListItem key={i}>
