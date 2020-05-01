@@ -19,7 +19,7 @@ let links = [
   "https://www.interviewcake.com/table-of-contents",
   "https://www.educative.io/courses/grokking-the-object-oriented-design-interview",
   "https://www.pramp.com/#/",
-  "https://leetcode.com/tag/stack/",
+  "https://leetcode.com/explore/learn/",
   "https://www.interviewcake.com/article/python/data-structures-coding-interview",
   "https://www.interviewcake.com/concept/java/hash-map",
   "https://www.interviewcake.com/data-structures-and-algorithms-guide",
