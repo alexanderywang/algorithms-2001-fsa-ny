@@ -2,6 +2,7 @@ import React from "react";
 import { Grid, Link, Typography } from "@material-ui/core";
 import arraySortingAlgorithms from "../arraySortingAlgorithms.png";
 import dataStructureOperations from "../dataStructureOperations.png";
+import timeComplexityOfLL from "../timeComplexityOfLL.png";
 import BigOComplexity from "../BigOComplexity.png";
 
 export default function Complexities() {
@@ -32,22 +33,28 @@ export default function Complexities() {
         <img
           alt="BigOComplexity"
           src={BigOComplexity}
-          style={{ width: "100%" }}
+          style={{ width: "75%" }}
         />
       </Grid>
       <Grid>
         <img
           alt="dataStructureOperations"
           src={dataStructureOperations}
-          style={{ width: "100%" }}
+          style={{ width: "75%" }}
         />
       </Grid>
-
+      <Grid>
+        <img
+          alt="timeComplexityOfLL"
+          src={timeComplexityOfLL}
+          style={{ width: "75%" }}
+        />
+      </Grid>
       <Grid>
         <img
           alt="arraySortingAlgorithms"
           src={arraySortingAlgorithms}
-          style={{ width: "100%" }}
+          style={{ width: "75%" }}
         />
       </Grid>
     </Grid>
