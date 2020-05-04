@@ -114,7 +114,7 @@ export default function Header({ user }) {
               className={classes.tab}
               component={Link}
               to='/format'
-              label='Format'
+              label='Format & Links'
             />
             <Tab
               className={classes.tab}

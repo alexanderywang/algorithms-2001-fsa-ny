@@ -58,11 +58,10 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: "Date",
+    id: "date",
     label: "Date",
     columnAlignment: true,
-    disablePadding: false,
-    label: "Date"
+    disablePadding: false
   },
   {
     id: "link",
@@ -103,7 +102,9 @@ function EnhancedTableHead(props) {
               {headCell.label}
               {orderBy === headCell.id ? (
                 <span className={classes.visuallyHidden}>
-                  {order === "desc" ? "sorted descending" : "sorted ascending"}
+                  {order === "desc"
+                    ? "sorted descending"
+                    : "sorted ascending"}
                 </span>
               ) : null}
             </TableSortLabel>
@@ -122,19 +123,36 @@ EnhancedTableHead.propTypes = {
 };
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    width: "100%"
+  },
   paper: {
     width: "100%",
-    padding: "1em"
+    marginBottom: theme.spacing(2)
+  },
+  table: {
+    minWidth: 750
+  },
+  visuallyHidden: {
+    border: 0,
+    clip: "rect(0 0 0 0)",
+    height: 1,
+    margin: -1,
+    overflow: "hidden",
+    padding: 0,
+    position: "absolute",
+    top: 20,
+    width: 1
   }
 }));
 
-export default function ArchiveTable({user}) {
+export default function ArchiveTable({ user }) {
   const classes = useStyles();
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("");
   const [page, setPage] = useState(0);
   const [dense, setDense] = useState(false);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(25);
   const [random, setRandom] = useState("");
   const [archives, setArchives] = useState([]);
 
@@ -353,7 +371,8 @@ export default function ArchiveTable({user}) {
                         padding="none"
                       >
                         {row.createdAt}
-                      </TableCell >
+                      </TableCell>
+                      {/* <TableCell align="left">{row.createdAt}</TableCell> */}
                       <Link target="_blank" href={`${row.archive}`}>
                         <TableCell align="left">{row.archive}</TableCell>
                       </Link>
@@ -370,16 +389,18 @@ export default function ArchiveTable({user}) {
                         </Tooltip>
                       </TableCell>
                       {/* Admin Only */}
-                      {user.email === "alex@wang.com" && (<TableCell>
-                      <Tooltip title="Delete Theme">
-                        <IconButton
-                          aria-label="delete"
-                          onClick={() => handleDelete(row.archiveId)}
-                        >
-                          <DeleteIcon />
-                        </IconButton>
-                      </Tooltip>
-                      </TableCell>)}
+                      {user.email === "alex@wang.com" && (
+                        <TableCell>
+                          <Tooltip title="Delete Theme">
+                            <IconButton
+                              aria-label="delete"
+                              onClick={() => handleDelete(row.archiveId)}
+                            >
+                              <DeleteIcon />
+                            </IconButton>
+                          </Tooltip>
+                        </TableCell>
+                      )}
                     </TableRow>
                   );
                 })}
@@ -415,7 +436,7 @@ export default function ArchiveTable({user}) {
           ? Random Question ?
         </Button>
         <Grid>
-          <Link href={`${random}`}>
+          <Link target="_blank" href={`${random}`}>
             <Typography>{random}</Typography>
           </Link>
         </Grid>
