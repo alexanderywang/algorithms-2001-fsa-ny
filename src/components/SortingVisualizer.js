@@ -146,8 +146,8 @@ const SortingVisualizer = () => {
         >
           <Tab label='BubbleSort' {...a11yProps(0)} />
           <Tab label='InsertionSort' {...a11yProps(1)} />
-          <Tab label='Item Three' {...a11yProps(2)} />
-          <Tab label='Item Four' {...a11yProps(3)} />
+          {/* <Tab label='Item Three' {...a11yProps(2)} />
+          <Tab label='Item Four' {...a11yProps(3)} /> */}
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
