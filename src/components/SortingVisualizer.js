@@ -16,9 +16,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import layoutStypes from './sorting.module.scss';
 // import BubbleSort from './BubbleSort';
 
-import { getData } from '../store/sorting-data';
-import { BubbleSort } from './BubbleSortFun';
-import { InsertionSort } from './InsertionSortFun';
+import { BubbleSort } from './sortingFun/BubbleSortFun';
+import { InsertionSort } from './sortingFun/InsertionSortFun';
+import { MergeSortFun } from './sortingFun/MergeSortFun';
 
 const sleep = (milliseconds) => {
   return new Promise((resolve, reject) => {
@@ -125,6 +125,9 @@ const SortingVisualizer = () => {
       case 1:
         InsertionSort(data, dataChanged);
         break;
+      case 2:
+        MergeSortFun(data, dataChanged);
+        break;
       default:
         BubbleSort(data, dataChanged);
     }
@@ -146,8 +149,8 @@ const SortingVisualizer = () => {
         >
           <Tab label='BubbleSort' {...a11yProps(0)} />
           <Tab label='InsertionSort' {...a11yProps(1)} />
-          {/* <Tab label='Item Three' {...a11yProps(2)} />
-          <Tab label='Item Four' {...a11yProps(3)} /> */}
+          <Tab label='Merge Sort' {...a11yProps(2)} />
+          {/*<Tab label='Item Four' {...a11yProps(3)} /> */}
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -157,7 +160,7 @@ const SortingVisualizer = () => {
         Insertion Sort
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        Merge Sort
       </TabPanel>
 
       <BarChart width={730} height={250} data={data}>
