@@ -1,99 +1,80 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { BarChart, CartesianGrid, Bar, XAxis, Cell } from 'recharts';
 import Button from '@material-ui/core/Button';
-import {
-  Slider,
-  Grid,
-  Typography,
-  AppBar,
-  Tabs,
-  Tab,
-  Box,
-  Paper,
-} from '@material-ui/core';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import { Slider, Grid, Typography } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 import layoutStypes from './sorting.module.scss';
-// import BubbleSort from './BubbleSort';
 
-import { getData } from '../store/sorting-data';
-import { BubbleSort } from './BubbleSortFun';
-import { InsertionSort } from './InsertionSortFun';
+const PrettoSlider = withStyles({
+  root: {
+    color: '#52af77',
+    height: 8,
+  },
+  thumb: {
+    height: 24,
+    width: 24,
+    backgroundColor: '#fff',
+    border: '2px solid currentColor',
+    marginTop: -8,
+    marginLeft: -12,
+    '&:focus,&:hover,&$active': {
+      boxShadow: 'inherit',
+    },
+  },
+  active: {},
+  valueLabel: {
+    left: 'calc(-50% + 4px)',
+  },
+  track: {
+    height: 8,
+    borderRadius: 4,
+  },
+  rail: {
+    height: 8,
+    borderRadius: 4,
+  },
+})(Slider);
 
 const sleep = (milliseconds) => {
   return new Promise((resolve, reject) => {
     setTimeout(resolve, milliseconds);
   });
 };
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
 
-  return (
-    <div
-      role='tabpanel'
-      hidden={value !== index}
-      id={`scrollable-auto-tabpanel-${index}`}
-      aria-labelledby={`scrollable-auto-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box p={3}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `scrollable-auto-tab-${index}`,
-    'aria-controls': `scrollable-auto-tabpanel-${index}`,
-  };
-}
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    width: '100%',
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
-const SortingVisualizer = () => {
-  const [data, setData] = useState([
-    {
-      name: '500',
-      value: 500,
-    },
-    {
-      name: '300',
-      value: 300,
-    },
-    {
-      name: '50',
-      value: 50,
-    },
-    {
-      name: '1000',
-      value: 1000,
-    },
-  ]);
-
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    console.log(newValue);
-    setValue(newValue);
-  };
-
-  const genernrateRandomArray = () => {
+class SortingVisualizer extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      data: [
+        {
+          name: '500',
+          value: 500,
+        },
+        {
+          name: '300',
+          value: 300,
+        },
+        {
+          name: '50',
+          value: 50,
+        },
+        {
+          name: '1000',
+          value: 1000,
+        },
+      ],
+      speed: 500,
+      pause: false,
+    };
+    this.changedata = this.changedata.bind(this);
+    this.dataChanged = this.dataChanged.bind(this);
+    this.bubbleSort = this.bubbleSort.bind(this);
+    this.genernrateRandomArray = this.genernrateRandomArray.bind(this);
+  }
+  changeSpeed(e, value) {
+    this.setState({ speed: value });
+  }
+  genernrateRandomArray() {
     let array = [];
     let size = Math.floor(Math.random() * 101) + 4;
 
@@ -104,89 +85,88 @@ const SortingVisualizer = () => {
         value: randomNum,
       };
     }
+    this.setState({
+      data: array,
+    });
+  }
+  async bubbleSort(array) {
+    for (let i = 0; i < array.length; ++i) {
+      array[i].compare = true;
+      for (let j = i; j < array.length - 1; ++j) {
+        array[j + 1].compare = true;
+        if (array[i].value > array[j + 1].value) {
+          let temp = array[i].value;
+          array[i].value = array[j + 1].value;
+          array[i].name = '' + array[j + 1].value;
+          array[j + 1].value = temp;
+          array[j + 1].name = '' + temp;
+        }
+        this.setState({ data: Array.from(array) });
 
-    setData(array);
-  };
+        await sleep(1000 - this.state.speed);
 
-  const dataChanged = (array) => {
-    setData(Array.from(array));
-  };
-
-  const changedata = (e) => {
-    // BubbleSort(this.state.data, this.dataChanged);
-    // this.setState({
-    //   sortStart: true,
-    // });
-
-    switch (value) {
-      case 0:
-        BubbleSort(data, dataChanged);
-        break;
-      case 1:
-        InsertionSort(data, dataChanged);
-        break;
-      default:
-        BubbleSort(data, dataChanged);
+        array[j + 1].compare = false;
+      }
+      array[i].compare = false;
+      array[i].done = '#00C49F';
     }
-    // InsertionSort(data, dataChanged);
-  };
+    this.setState({ data: Array.from(array) });
+  }
+  dataChanged(array) {
+    this.setState({
+      data: Array.from(array),
+    });
+  }
 
-  const colors = ['#0088FE', '#FF0000', '#FFBB28', '#FF8042'];
-  return (
-    <div className={layoutStypes.container}>
-      <AppBar position='static' color='default'>
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor='primary'
-          textColor='primary'
-          variant='scrollable'
-          scrollButtons='auto'
-          aria-label='scrollable auto tabs example'
-        >
-          <Tab label='BubbleSort' {...a11yProps(0)} />
-          <Tab label='InsertionSort' {...a11yProps(1)} />
-          {/* <Tab label='Item Three' {...a11yProps(2)} />
-          <Tab label='Item Four' {...a11yProps(3)} /> */}
-        </Tabs>
-      </AppBar>
-      <TabPanel value={value} index={0}>
-        Bubble Sort
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Insertion Sort
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
+  changedata(e) {
+    this.bubbleSort(this.state.data);
+  }
+  render() {
+    const colors = ['#0088FE', '#FF0000', '#FFBB28', '#FF8042'];
+    return (
+      <div className={layoutStypes.container}>
+        <h1>Bubble Sort</h1>
+        <BarChart width={730} height={250} data={this.state.data}>
+          <XAxis dataKey='name' />
 
-      <BarChart width={730} height={250} data={data}>
-        <XAxis dataKey='name' />
+          <Bar dataKey='value'>
+            {this.state.data.map((entry, index) => {
+              const color = entry.compare ? colors[0] : colors[1];
+              return (
+                <Cell key={index} fill={entry.done ? entry.done : color} />
+              );
+            })}
+          </Bar>
+        </BarChart>
 
-        <Bar dataKey='value'>
-          {data.map((entry, index) => {
-            return (
-              <Cell
-                key={index}
-                fill={
-                  entry.done
-                    ? entry.done
-                    : entry.color
-                    ? entry.color
-                    : colors[1]
-                }
-              />
-            );
-          })}
-        </Bar>
-      </BarChart>
-      <Box>
-        <Button onClick={(e) => changedata(e)}>Start</Button>
+        <Grid container spacing={3}>
+          <Grid item xs={4}>
+            <Button onClick={(e) => this.changedata(e)}>Start</Button>
+          </Grid>
 
-        <Button onClick={() => genernrateRandomArray()}>Random Array</Button>
-      </Box>
-    </div>
-  );
-};
+          <Grid item xs={4}>
+            <Button onClick={() => this.genernrateRandomArray()}>
+              Random Array
+            </Button>
+          </Grid>
+          <Typography>Slow</Typography>
+          <Grid item xs={10}>
+            <PrettoSlider
+              defaultValue={500}
+              value={this.state.speed}
+              aria-labelledby='discrete-slider-small-steps'
+              step={10}
+              min={0}
+              max={1000}
+              onChange={(e, value) => this.changeSpeed(e, value)}
+              valueLabelDisplay='auto'
+            />
+          </Grid>
+          <Typography>Fast</Typography>
+        </Grid>
+      </div>
+    );
+  }
+}
 
 export default SortingVisualizer;

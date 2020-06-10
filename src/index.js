@@ -1,10 +1,10 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './components/App';
-import { ThemeProvider } from './components/ThemeContext';
-import { ToastProvider } from 'react-toast-notifications';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./components/App";
+import { ThemeProvider } from "./components/ThemeContext";
+import { ToastProvider } from "react-toast-notifications";
+import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <ThemeProvider>
@@ -14,7 +14,7 @@ ReactDOM.render(
       </React.StrictMode>
     </ToastProvider>
   </ThemeProvider>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change
