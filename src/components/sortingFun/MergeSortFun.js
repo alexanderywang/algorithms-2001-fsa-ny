@@ -1,5 +1,6 @@
 import { sleep } from './ult.js';
 export const MergeSortFun = (array, callback) => {
+  console.log('mergesort ', array);
   if (array.length === 1 || array.length === 0) return array;
 
   // split the array in half
@@ -49,13 +50,14 @@ function merge(leftUnsortedArray, rightUnsortedArray, callback) {
     if (
       leftUnsortedArray[leftIndex].value < rightUnsortedArray[rightIndex].value
     ) {
-      sortedArray[sortedArrayIndex].value = leftUnsortedArray[leftIndex].value;
+      sortedArray[sortedArrayIndex] = leftUnsortedArray[leftIndex];
+      sortedArray[sortedArrayIndex].color = '#00C49F';
       leftIndex++;
     } else {
       // if first element of right array is smaller then the first element of the
       //  left array, then copy that element to the sorted array
-      sortedArray[sortedArrayIndex].value =
-        rightUnsortedArray[rightIndex].value;
+      sortedArray[sortedArrayIndex] = rightUnsortedArray[rightIndex];
+      sortedArray[sortedArrayIndex].color = '#00C49F';
       rightIndex++;
     }
 
@@ -65,14 +67,17 @@ function merge(leftUnsortedArray, rightUnsortedArray, callback) {
   // loop thru the remaining elements (there should be only 1 left)
   //  and copy that last element into the sorted array
   for (let i = leftIndex; i < leftUnsortedArray.length; i++) {
-    sortedArray[sortedArrayIndex].value = leftUnsortedArray[i].value;
+    sortedArray[sortedArrayIndex] = leftUnsortedArray[i];
+    sortedArray[sortedArrayIndex].color = '#00C49F';
     sortedArrayIndex++;
   }
 
   for (let i = rightIndex; i < rightUnsortedArray.length; i++) {
-    sortedArray[sortedArrayIndex].value = rightUnsortedArray[i].value;
+    sortedArray[sortedArrayIndex] = rightUnsortedArray[i];
+    sortedArray[sortedArrayIndex].color = '#00C49F';
     sortedArrayIndex++;
   }
+  // console.log('merge', sortedArray);
   callback(sortedArray);
   return sortedArray;
 }
