@@ -19,7 +19,7 @@ import layoutStypes from './sorting.module.scss';
 import { BubbleSort } from './sortingFun/BubbleSortFun';
 import { InsertionSort } from './sortingFun/InsertionSortFun';
 import { MergeSortFun } from './sortingFun/MergeSortFun';
-
+import { QuickSort } from './sortingFun/QuickSortFun';
 const sleep = (milliseconds) => {
   return new Promise((resolve, reject) => {
     setTimeout(resolve, milliseconds);
@@ -128,6 +128,9 @@ const SortingVisualizer = () => {
       case 2:
         MergeSortFun(data, dataChanged);
         break;
+      case 3:
+        QuickSort(data,0,data.length-1, dataChanged);
+        break;
       default:
         BubbleSort(data, dataChanged);
     }
@@ -150,7 +153,7 @@ const SortingVisualizer = () => {
           <Tab label='BubbleSort' {...a11yProps(0)} />
           <Tab label='InsertionSort' {...a11yProps(1)} />
           <Tab label='Merge Sort' {...a11yProps(2)} />
-          {/*<Tab label='Item Four' {...a11yProps(3)} /> */}
+          <Tab label='Quick SOrt' {...a11yProps(3)} />
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -161,6 +164,9 @@ const SortingVisualizer = () => {
       </TabPanel>
       <TabPanel value={value} index={2}>
         Merge Sort
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        Quick Sort
       </TabPanel>
 
       <BarChart width={730} height={250} data={data}>
